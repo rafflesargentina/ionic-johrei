@@ -1,0 +1,74 @@
+<ion-app>
+  <ion-split-pane when="(min-width: 1367px)" contentId="main-content" class="sidebar">
+    <ion-menu contentId="main-content" type="overlay" class="sidebar-menu">
+      <ion-content class="sidebar-content">
+
+	<header class="sidebar-header ion-text-center">
+	  <ion-avatar class="sidebar-user_avatar">
+            <img *ngIf="user" [src]="user.avatar.small">
+	    <img *ngIf="!user" src="../../../assets/images/cruz_izunome.jpg">
+	  </ion-avatar>
+
+	  <div *ngIf="user">
+	    <h3 class="sidebar-user_name">{{user.name}}</h3>
+	    <h5 class="sidebar-user_kind" *ngIf="user.frequenter">Frecuentador</h5>
+	    <h5 class="sidebar-user_kind" *ngIf="user.member">Miembro</h5>
+	  </div>
+
+	  <div *ngIf="!user">
+            <h3 class="sidebar-user_name">¡Hola invitado!</h3>
+	    <h5 class="sidebar-user_kind">Aún no iniciaste sesión</h5>
+	  </div>
+	</header>
+                
+        <ion-list *ngIf="isAuthenticated">
+          <ion-menu-toggle auto-hide="false">
+	    <ion-item (click)="cargarNoticia()" *ngIf="isAdmin" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="document-text-outline"></ion-icon>
+              <ion-label>Cargar Noticias</ion-label>
+            </ion-item>   
+            <ion-item (click)="cargarEventos()" *ngIf="isAdmin" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="calendar"></ion-icon>
+              <ion-label>Cargar Eventos</ion-label>
+            </ion-item> 
+            <ion-item (click)="editarUsuario()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+              <ion-label>Mis Datos</ion-label>
+            </ion-item> 
+            <ion-item (click)="cerrarSesion()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="exit-outline"></ion-icon>
+              <ion-label>Cerrar Sesión</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+        <ion-list *ngIf="!isAuthenticated">
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="login()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
+              <ion-label>Ingresá a tu cuenta</ion-label> 
+            </ion-item>
+            <ion-item (click)="register()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
+              <ion-label>Registrate</ion-label>
+            </ion-item>
+            <ion-item (click)="recoverPassword()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="key-outline"></ion-icon>
+              <ion-label>Recuperá tu contraseña</ion-label>
+            </ion-item>
+            <ion-item (click)="cerrarSesion()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="exit-outline"></ion-icon>
+              <ion-label>Cerrar Sesión</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+      </ion-content>
+
+      <ion-text color="medium" class="ion-padding">v1.0.0</ion-text>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  </ion-split-pane>
+</ion-app>

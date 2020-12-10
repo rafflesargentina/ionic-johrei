@@ -1,0 +1,49 @@
+<ion-card>
+  <div *ngIf="noticia.photos[0]" class="article-img_container">
+    <img class="article-img" src="{{noticia.photos[0].url}}" alt="{{noticia.photos[0].description}}">
+  </div>
+
+  <ion-card-header>
+    <ion-card-subtitle>{{noticia.updated_at | date: "HH:mm ' hs.'"}}
+      <div class="noticia-more" *ngIf="isAdmin">
+        <ion-button fill="clear" (click)="editarNoticia()">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-subtitle>
+    <ion-card-title><h4>{{noticia.title}}</h4></ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p class="ion-padding-bottom" *ngIf="noticia.body">{{noticia.body}}</p>
+
+    <div class="ion-margin-bottom" *ngIf="noticia.videos.length > 0">
+      <ion-card-subtitle>Videos adjuntos</ion-card-subtitle>
+      <video *ngFor="let video of noticia.videos" style="width:100%;" controls=true src="{{video.url}}"></video>
+    </div>
+
+    <div class="ion-margin-bottom" *ngIf="noticia.audios.length > 0">
+      <ion-card-subtitle>Audios adjuntos</ion-card-subtitle>
+      <ion-list>
+        <ion-item lines="none" *ngFor="let audio of noticia.audios">
+          <audio style="width: 100%;" controls=true src="{{audio.url}}"></audio>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngIf="noticia.documents.length > 0">
+      <ion-card-subtitle>Documentos adjuntos</ion-card-subtitle>
+      <ion-list>
+        <ion-item lines="none" *ngFor="let document of noticia.documents">
+          <ion-avatar slot="start">
+            <img src="{{document.thumbnail}}" alt="{{document.name}}">
+          </ion-avatar>
+          <ion-label>
+	    <h2><a href="{{document.url}}">{{document.name}}</a></h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card-content>
+</ion-card>
+

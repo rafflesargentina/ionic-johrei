@@ -1,0 +1,20 @@
+<ion-toolbar>
+  <ion-buttons *ngIf="icono == 'menu'" slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+
+  <ion-title class="isologo">
+    <h4>{{titulo}}</h4>
+  </ion-title>
+
+  <div class="header-logo" slot="end">
+    <img src="../../../assets/images/cruz_izunome.jpg" alt="Cruz Izunome">
+  </div>
+
+  <ion-buttons *ngIf="icono == 'close'" class="header-logo" slot="start" (click)="atras()">
+    <img src="../../../assets/iconos/icono_cancelar.svg" alt="">
+  </ion-buttons>
+  <ion-buttons *ngIf="icono == 'back'" class="header-logo" slot="start" (click)="atras()">
+    <img src="../../../assets/iconos/icono_flecha_back.svg" alt="">
+  </ion-buttons>
+</ion-toolbar>

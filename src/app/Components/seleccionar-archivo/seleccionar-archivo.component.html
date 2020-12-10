@@ -1,0 +1,20 @@
+<input #fileInput  type="file" multiple="multiple" name="files[]" accept="image/*;" (change)="seleccionarArchivoWeb($event)" style="display:none;" /> 
+<div *ngIf="!archivo && !IsMobile" (click)="fileInput.click()">
+  <div style="padding: 30px;">
+    <ion-button color="secondary" size="small">Seleccione un archivo</ion-button>
+  </div>
+</div>  
+<div *ngIf="!archivo && IsMobile" (click)="seleccionarArchivo()">
+  <div style="padding: 30px;">
+    <ion-button color="secondary">Seleccioná un archivo</ion-button>
+  </div>
+</div>
+
+<div *ngIf="archivo && IsMobile" (click)="seleccionarArchivo()">
+  {{archivo.name}}
+</div>
+
+<div *ngIf="archivo && !IsMobile" (click)="fileInput.click()">
+  {{archivo.name}}
+</div>
+

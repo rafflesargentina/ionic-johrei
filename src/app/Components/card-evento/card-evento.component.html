@@ -1,0 +1,33 @@
+<ion-card class="evento">
+  <div *ngIf="data.photos[0]" class="article-img_container">
+    <img class="article-img" src="{{data.photos[0].url}}" alt="{{data.photos[0].description}}">
+  </div>
+
+  <ion-card-header>
+    <ion-card-subtitle>A las {{data.hour}} hs. - dura {{data.duration}} {{data.duration !== "1" ? 'horas' : 'hora'}}</ion-card-subtitle>
+    <ion-card-title>
+      <h3>{{data.title}}</h3>
+      <div class="evento-more" *ngIf="isAdmin">
+        <ion-button fill="clear" (click)="editarEvento()">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p class="ion-padding-bottom" *ngIf="data.comment">{{data.comment}}</p>
+
+    <div *ngIf="showActions&&!isAdmin">
+      <ion-button type="button" color="success" slot="end" expand="block"
+      (click)="aceptar($event)">Asisitré</ion-button>
+      <ion-button type="button" color="danger" slot="start" expand="block"
+      (click)="rechazar($event)">No Asistiré</ion-button>
+    </div>
+
+    <div *ngIf="!showActions&&!isAdmin">
+      <ion-chip *ngIf="isAccepted" color="success"><ion-label color="success">Asistiré</ion-label></ion-chip>
+      <ion-chip *ngIf="isRejected" color="danger"><ion-label color="danger">No asistiré</ion-label></ion-chip>
+    </div>
+  </ion-card-content>
+</ion-card>

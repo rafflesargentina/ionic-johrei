@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar>
+    <app-header [titulo]="'Eventos'" [icono]="'menu'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!--Refresher-->
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--Eventos-->
+  <ion-grid fixed>
+    <div *ngIf="items.length === 0" class="content-placeholder">
+      <p>No hay eventos para mostrar.</p>
+    </div>
+
+    <div *ngFor="let chunk of items">
+      <h2>{{ chunk[0].date | date: "dd 'de' MMMM" }}</h2>
+      <ion-row>
+        <ion-col *ngFor="let item of chunk" size="12" size-lg="4" size-md="3">
+          <app-card-evento [data]="item"></app-card-evento>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+
+  <!--Botón flotante para agregar items si es administrador-->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isAdmin">
+    <ion-fab-button (click)="agregarEvento()" >
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--Infinite-Scroll-->
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)" [disabled]="isDisabled">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

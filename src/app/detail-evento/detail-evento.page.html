@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title><h4>{{evento.title}}</h4></ion-card-title>
+      <ion-button (click)="dismiss()" size="small" fill="clear" class="cerrar">
+        <ion-icon slot="icon-only" color="danger" name="close-outline" ></ion-icon>
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label><strong>Fecha:</strong> {{evento.date | date:"dd 'de' MMMM 'de' yyyy"}}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="evento.hour">
+          <ion-label><strong>Hora:</strong> {{evento.hour}} hs.</ion-label>
+        </ion-item>
+        <ion-item *ngIf="evento.duration">
+          <ion-label>
+            <strong>Duración del evento:</strong> {{evento.duration}} horas
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="evento.comment">
+          <ion-label><strong>Descripción</strong> {{evento.comment}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

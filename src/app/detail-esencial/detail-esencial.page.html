@@ -1,0 +1,14 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{esencial.documentable_type}}</ion-card-subtitle>
+      <ion-card-title>{{esencial.name}}</ion-card-title>
+      <ion-button (click)="dismiss()" size="small" fill="clear" class="cerrar">
+        <ion-icon slot="icon-only" color="danger" name="close-outline" ></ion-icon>
+       </ion-button>
+    </ion-card-header>
+    <ion-card-content>    
+     <div [innerHTML]="esencial.description"></div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

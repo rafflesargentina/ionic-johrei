@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "135566025431",
+    "firebase_url": "https://johrei-36d81.firebaseio.com",
+    "project_id": "johrei-36d81",
+    "storage_bucket": "johrei-36d81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135566025431:android:2ab2ebeb742ee7f53b0692",
+        "android_client_info": {
+          "package_name": "ionic.app.johrei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135566025431-kie77scljn7i0ghe7bi6233lse62etn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnwxVcNA9PlISuvoCZlMDDwtH9F0DCpIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135566025431-kie77scljn7i0ghe7bi6233lse62etn0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

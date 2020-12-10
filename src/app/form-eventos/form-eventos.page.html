@@ -1,0 +1,78 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="titulo" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="datosForm">
+    <!--Título-->
+    <ion-item [class.invalid]="submitted && !datosForm.controls.title.valid">
+      <ion-label position="floating">Título del Evento</ion-label>
+      <ion-textarea name="content" autoGrow="true" inputmode="text" spellcheck="true" formControlName="title" required></ion-textarea>
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">
+          <h5>Ingrese un Título</h5>
+        </div>
+      </div>
+    </ion-item>
+
+    <!--Contenido-->
+    <ion-item [class.invalid]="submitted && !datosForm.controls.comment.valid">
+      <ion-label position="floating">Mensaje</ion-label>  
+      <div class="separacion"></div>
+      <ion-textarea name="content" autoGrow="true" inputmode="text" spellcheck="true" formControlName="comment" required></ion-textarea>
+      <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+        <div *ngIf="f.comment.errors.required">
+          <h5>Ingrese un Contenido</h5>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item [class.invalid]="submitted && !datosForm.controls.duration.valid">
+      <ion-label position="floating">Duración</ion-label>
+      <ion-input name="title" type="number" formControlName="duration"></ion-input>
+      <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
+        <div *ngIf="f.duration.errors.required">
+          <h5>Ingrese una Duración</h5>
+        </div>
+      </div>
+    </ion-item>
+
+    <!--Fecha-->
+    <ion-item [class.invalid]="submitted && !datosForm.controls.date.valid">
+      <ion-label position="floating">Fecha</ion-label>     
+      <ion-datetime displayFormat="DD MMMM YYYY" formControlName="date"></ion-datetime>
+      <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+          <div *ngIf="f.date.errors.required"><h5>Ingresa una Fecha</h5></div>
+      </div>
+    </ion-item>  
+
+    <!--Hora-->
+    <ion-item [class.invalid]="submitted && !datosForm.controls.hour.valid">
+      <ion-label position="floating">Hora</ion-label>     
+      <ion-datetime displayFormat="H:mm" formControlName="hour"></ion-datetime>
+      <div *ngIf="submitted && f.hour.errors" class="invalid-feedback">
+          <div *ngIf="f.hour.errors.required"><h5>Ingresa una Hora</h5></div>
+      </div>
+    </ion-item> 
+
+    <ion-item>
+      <ion-label position="floating">Foto</ion-label>  
+      <div class="portada-foto">
+        <app-seleccionar-archivo (onSelectValue)=imagenSeleccionado($event)></app-seleccionar-archivo>
+      </div>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ion-padding"> 
+    <ion-button *ngIf="isEditando" type="submit" slot="start" color="danger" (click)="eliminarEvento()">
+      <ion-label>Eliminar</ion-label>
+    </ion-button>   
+    <ion-button type="submit" slot="end" color="success" (click)="registrar()">
+      <ion-label>Guardar</ion-label>
+    </ion-button>   
+  </ion-toolbar> 
+</ion-footer>

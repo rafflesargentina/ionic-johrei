@@ -1,0 +1,173 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Mis Datos'" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="account-content content ion-padding">
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col size-md="6">
+        <form [formGroup]="datosForm">
+          <!--nombre-->
+          <ion-item [class.invalid]="submitted && !f.first_name.valid">
+            <ion-label position="floating">Nombre *</ion-label>     
+            <ion-input name="nombre" type="text" formControlName="first_name" required></ion-input>
+            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+              <div *ngIf="f.first_name.errors.required"><h5>Ingresa un Nombre</h5></div>
+            </div>
+          </ion-item>
+        
+          <!--apellido-->
+          <ion-item [class.invalid]="submitted && !f.last_name.valid">
+            <ion-label position="floating">Apellido *</ion-label>
+            <ion-input name="apellido" type="text" formControlName="last_name" required></ion-input>
+            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+              <div *ngIf="f.last_name.errors.required"><h5>Ingresa un Apellido</h5></div>
+            </div>
+          </ion-item>
+
+          <!--dni-->
+          <ion-item [class.invalid]="submitted && !f.document_number.valid">
+            <ion-label position="floating">Numero de documento *</ion-label>
+            <ion-input name="document_number" type="number" formControlName="document_number" required></ion-input>
+            <div *ngIf="submitted && f.document_number.errors" class="invalid-feedback">
+              <div *ngIf="f.document_number.errors.required"><h5>Ingresa un número de documento</h5></div>
+            </div>
+          </ion-item>
+
+          <!--email-->
+          <ion-item [class.invalid]="submitted && !f.email.valid">
+            <ion-label position="floating">E-mail *</ion-label>
+            <ion-input name="email" type="email" formControlName="email" required></ion-input>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required"><h5>Ingresa un Email</h5></div>
+            </div>
+          </ion-item> 
+
+          <!--telefono-->
+          <ion-item formGroupName="contact" [class.invalid]="submitted&&!contactControls.mobile.valid">
+            <ion-label position="floating">Teléfono celular *</ion-label>
+            <ion-input name="mobile" type="tel" formControlName="mobile" required></ion-input>
+            <div *ngIf="submitted&&contactControls.mobile.errors" class="invalid-feedback">
+              <div *ngIf="contactControls.mobile.errors.required"><h5>Ingresá tu número de teléfono celular</h5></div>
+            </div>
+          </ion-item> 
+
+          <ion-item formGroupName="address" [class.invalid]="submitted&&!addressControls.location.valid">
+            <ion-label position="floating">Autocompletar dirección</ion-label>
+            <ion-input id="autocomplete" formControlName="location" type="text"></ion-input>
+            <div *ngIf="submitted && addressControls.location.errors" class="invalid-feedback">
+              <div *ngIf="!addressControls.location.required"><h5>Ingresá una dirección o ubicación  válida</h5></div>
+            </div>
+          </ion-item>
+
+          <ion-item formGroupName="address">
+            <ion-row>
+              <ion-col size="9">
+                <div [class.invalid]="submitted&&!addressControls.street_name.valid">
+                  <ion-label position="floating">Calle</ion-label>
+                  <ion-input formControlName="street_name" name="street_name" type="text"></ion-input>
+                  <div *ngIf="submitted && addressControls.street_name.errors" class="invalid-feedback">
+                    <div *ngIf="!addressControls.street_name.required"><h5>Ingresá una calle válida</h5></div>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col size="3">
+                <div [class.invalid]="submitted&&!addressControls.street_number.valid">
+                  <ion-label position="floating">Número</ion-label>
+                  <ion-input formControlName="street_number" name="street_number" type="number"></ion-input>
+                  <div *ngIf="submitted && addressControls.street_number.errors" class="invalid-feedback">
+                    <div *ngIf="!addressControls.street_number.required"><h5>Ingresá una numeración válida</h5></div>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item formGroupName="address">
+            <ion-row>
+              <ion-col size="6">
+                <ion-label position="floating">Piso</ion-label>
+                <ion-input name="piso" type="number" min="0" formControlName="door_number"></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-label position="floating">Puerta</ion-label>
+                <ion-input name="puerta" type="text" formControlName="floor_number"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item formGroupName="address">
+            <ion-row>
+              <ion-col size="6" [class.invalid]="submitted&&!addressControls.locality.valid">
+                <ion-label position="floating">Localidad *</ion-label>
+                <ion-input formControlName="locality" type="text"></ion-input>
+                <div *ngIf="submitted && addressControls.locality.errors" class="invalid-feedback">
+                  <div *ngIf="!addressControls.locality.required"><h5>Ingresá una localidad válida</h5></div>
+                </div>
+              </ion-col>
+              <ion-col size="6" [class.invalid]="submitted&&!addressControls.sublocality.valid">
+                <ion-label position="floating">Barrio o pueblo</ion-label>
+                <ion-input formControlName="sublocality" type="text"></ion-input>
+                <div *ngIf="submitted && addressControls.sublocality.errors" class="invalid-feedback">
+                  <div *ngIf="!addressControls.sublocality.required"><h5>Ingresá un barrio o pueblo válida</h5></div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item formGroupName="address">
+            <ion-row>
+              <ion-col size="4" [class.invalid]="submitted&&!addressControls.zip.valid">
+                <ion-label position="floating">Cód. postal</ion-label>
+                <ion-input formControlName="zip" type="text"></ion-input>
+                <div *ngIf="submitted && addressControls.zip.errors" class="invalid-feedback">
+                  <div *ngIf="!addressControls.zip.required"><h5>Ingresá un código postal válido</h5></div>
+                </div>
+              </ion-col>
+              <ion-col size="8" [class.invalid]="submitted&&!addressControls.state.valid">
+                <ion-label position="floating">Provincia *</ion-label>
+                <ion-input formControlName="state" type="text"></ion-input>
+                <div *ngIf="submitted && addressControls.state.errors" class="invalid-feedback">
+                  <div *ngIf="!addressControls.state.required"><h5>Ingresá una provincia o estado válido</h5></div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item *ngIf="undefined!==googleMapsService.place&&googleMapsService.place.name" lines="none">
+            <ion-text color="medium"><ion-icon name="location-outline"></ion-icon> {{googleMapsService.place.name}}</ion-text>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="ion-margin-bottom ion-margin-top map-container">
+              <div id="mapDiv" class="map"></div>
+            </div>
+          </ion-item>
+      
+          <!--tipo de usuario-->
+          <div>
+            <ion-radio-group value="frequenter">
+              <ion-item >
+                <ion-label>Miembro</ion-label>
+                <ion-radio slot="end" value="member"></ion-radio>
+              </ion-item>
+              <ion-item >
+                <ion-label>Frecuentador</ion-label>
+                <ion-radio slot="end" value="frequenter"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </div>
+
+          <ion-button size="small" type="button" expand="block" color="primary" (click)="cambiarPassword()">
+            Cambiar contraseña
+          </ion-button>
+      
+          <ion-footer position="fixed-bottom">
+            <ion-button size="small" type="submit" expand="block" (click)="guardar()" color="success">Guardar</ion-button>
+          </ion-footer>      
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

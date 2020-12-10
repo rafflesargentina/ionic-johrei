@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Tu contraseña'" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-content content ion-padding">
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col size-md="4" offset-md="4">
+        <div class="auth-header">
+          <h1 class="auth-title">Johrei Argentina</h1>
+	  <ion-text color="medium">Por favor ingresá la dirección de e-mail que ingresaste cuando te registraste.<br>Te enviaremos instrucciones a esa casilla para que puede reestablecer la contraseña de tu cuenta.</ion-text>
+        </div>
+
+        <form [formGroup]="datosForm">
+          <ion-item class="ion-padding-bottom" [class.invalid]="submitted && !datosForm.controls.email.valid">
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input name="email" type="email" formControlName="email" required></ion-input>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required"><h5>Ingresá tu dirección de e-mail</h5></div>
+            </div>    
+	  </ion-item>
+
+          <ion-button type="submit" size="small" (click)="recuperar()" expand="block">Enviar e-mail</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="titulo" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="datosForm">
+    <!--Título-->
+    <ion-list>
+      <ion-item [class.invalid]="submitted && !datosForm.controls.title.valid">  
+        <ion-label position="floating">Título</ion-label>     
+	<ion-textarea name="content" autoGrow="true" inputmode="text" spellcheck="true" type="text" formControlName="title" required></ion-textarea>
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">
+            <h5>Ingrese un título</h5>
+          </div>
+        </div>
+      </ion-item>
+
+      <!--Contenido-->
+      <ion-item [class.invalid]="submitted && !datosForm.controls.body.valid"> 
+        <ion-label position="floating">Contenido</ion-label>  
+        <ion-textarea name="content" autoGrow="true" inputmode="text" spellcheck="true" rows="6" type="text" formControlName="body"></ion-textarea>
+        <div *ngIf="submitted && f.body.errors" class="invalid-feedback">
+          <div *ngIf="f.body.errors.required">
+            <h5>Ingrese un texto de contenido para la noticia</h5>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Foto</ion-label>  
+        <div class="portada-foto">
+          <app-seleccionar-archivo (onSelectValue)=imagenSeleccionado($event)></app-seleccionar-archivo>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Video</ion-label>  
+        <div class="portada-foto">
+          <app-seleccionar-archivo (onSelectValue)=videoSeleccionado($event)></app-seleccionar-archivo>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Audio</ion-label>  
+        <div class="portada-foto">
+          <app-seleccionar-archivo (onSelectValue)=audioSeleccionado($event)></app-seleccionar-archivo>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Documento</ion-label>  
+        <div class="portada-foto">
+          <app-seleccionar-archivo (onSelectValue)=pdfSeleccionado($event)></app-seleccionar-archivo>
+        </div>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ion-padding"> 
+    <ion-button *ngIf="isEditing" type="submit" slot="start" color="danger" (click)="eliminarNoticia()">
+      <ion-label>Borrar</ion-label>
+    </ion-button>   
+    <ion-button type="submit" slot="end" color="success" (click)="registrar()">
+      <ion-label>Guardar</ion-label>
+    </ion-button>   
+  </ion-toolbar> 
+</ion-footer>

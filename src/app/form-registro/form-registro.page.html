@@ -1,0 +1,147 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Registrate'" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-content content ion-padding">
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col offset-md="3" size-md="6">
+	<div class="auth-header">
+          <h1 class="auth-title">Johrei Argentina</h1>
+	  <ion-text color="medium">Por favor completá el siguiente formulario para comenzar a utilizar la aplicación.<br>Todos los campos son requeridos.</ion-text>
+	</div>
+
+        <form [formGroup]="datosForm">
+          <!--nombre-->
+          <ion-item [class.invalid]="submitted && !f.first_name.valid">
+            <ion-label position="floating">Nombre</ion-label>     
+	    <ion-input name="nombre" type="text" formControlName="first_name" required></ion-input>
+            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+              <div *ngIf="f.first_name.errors.required"><h5>Ingresá tu nombre</h5></div>
+            </div>
+          </ion-item>
+        
+          <!--apellido-->
+          <ion-item [class.invalid]="submitted && !f.last_name.valid">
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input name="apellido" type="text" formControlName="last_name" required ></ion-input>
+            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+              <div *ngIf="f.last_name.errors.required"><h5>Ingresá tu apellido</h5></div>
+            </div>
+          </ion-item>
+
+          <!--dni-->
+          <ion-item [class.invalid]="submitted && !f.document_number.valid">
+            <ion-label position="floating">Número de Documento</ion-label>
+            <ion-input name="document_number" type="number" formControlName="document_number" required ></ion-input>
+            <div *ngIf="submitted && f.document_number.errors" class="invalid-feedback">
+              <div *ngIf="f.document_number.errors.required"><h5>Ingresá tu número de documento</h5></div>
+            </div>
+          </ion-item>
+
+          <!--email-->
+          <ion-item [class.invalid]="submitted && !f.email.valid">
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input name="email" type="text" formControlName="email" required ></ion-input>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required"><h5>Ingresá tu e-mail</h5></div>
+            </div>
+          </ion-item> 
+
+          <!--telefono-->
+          <ion-item formGroupName="contact" [class.invalid]="submitted && !contactControls.mobile.valid">
+            <ion-label position="floating">Teléfono celular</ion-label>
+            <ion-input name="mobile" type="tel" formControlName="mobile" required ></ion-input>
+            <div *ngIf="submitted && contactControls.mobile.errors" class="invalid-feedback">
+              <div *ngIf="contactControls.mobile.errors.required"><h5>Ingresá tu número de teléfono celular</h5></div>
+            </div>
+          </ion-item> 
+
+          <!--contraseña-->
+          <ion-item [class.invalid]="submitted && !f.password.valid">
+	    <!--<ion-label position="floating">Contraseña</ion-label>-->
+            <ion-input name="password" [type]="passwordTypeInput1" placeholder="Contraseña" #passwordEyeRegister formControlName="password" required clear-on-edit="true"></ion-input> 
+            <ion-button fill="clear" (click)="togglePasswordMode()">
+              <ion-icon [name]="iconpassword1"></ion-icon>
+            </ion-button>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required"><h5>Ingresá una contraseña</h5></div>
+            </div>
+          </ion-item>    
+
+          <!--repetir contraseña-->
+          <ion-item [class.invalid]="submitted && !f.password_confirmation.valid">
+	    <!--<ion-label position="floating">Confirmación de contraseña</ion-label>-->
+            <ion-input name="password_confirmation" [type]="passwordTypeInput2" placeholder="Confirmación de contraseña" #passwordEyeConfirmation formControlName="password_confirmation" required clear-on-edit="true"></ion-input>
+            <ion-button fill="clear" (click)="togglePasswordConfirmMode()">
+              <ion-icon  [name]="iconpassword2"></ion-icon>
+            </ion-button>   
+            <div *ngIf="submitted && f.password_confirmation.errors" class="invalid-feedback">
+              <div *ngIf="f.password_confirmation.errors.required"><h5>Ingresá una contraseña</h5></div>
+            </div>  
+          </ion-item>
+
+          <ion-item formGroupName="address" [class.invalid]="submitted&&(undefined == place||!place.name)">
+            <ion-label position="floating">Dirección</ion-label>
+            <ion-input id="pac-input" formControlName="location" type="text"></ion-input>
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="undefined === place||!place.name"><h5>Ingresá una dirección o una localidad válida</h5></div>
+            </div>
+	  </ion-item>
+          <ion-item formGroupName="address">
+            <ion-row>
+              <ion-col size="6">
+                <ion-label position="floating">Piso</ion-label>
+                <ion-input name="floor_number" type="number" min="0" formControlName="floor_number"></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-label position="floating">Puerta</ion-label>
+                <ion-input name="door_number" type="text" formControlName="door_number"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item *ngIf="undefined!==place&&place.name" lines="none">
+            <ion-text color="medium"><ion-icon name="location-outline"></ion-icon> {{place.name}}</ion-text>
+	  </ion-item>
+	  <ion-item lines="none">
+            <div class="map-container">
+              <div id="mapDiv" class="map"></div>
+            </div>
+          </ion-item>
+
+          <!--tipo de usuario-->
+          <ion-radio-group value="frequenter" (ionChange)="cambio($event)">
+            <ion-item>
+              <ion-label>Soy miembro</ion-label>
+              <ion-radio slot="end" value="member"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Soy frecuentador</ion-label>
+              <ion-radio slot="end" value="frequenter"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+      
+          <!--acepto los terminos-->
+	  <div class="ion-margin-bottom">
+	    <ion-item lines="none" [class.invalid]="submitted&&f.accepted.errors">
+              <ion-label><a href="https://johrei.com.ar/politica-de-privacidad.pdf" target="_blank">Acepto los Términos y Condiciones<br> y la Política de Privacidad.</a></ion-label>
+              <ion-checkbox color="primary" slot="start" formControlName="accepted"></ion-checkbox>
+	    </ion-item>
+            <div *ngIf="submitted && f.accepted.errors" class="invalid-feedback">
+              <div *ngIf="f.accepted.errors.required">
+                <h5>Debes leer y aceptar los términos y condiciones</h5>
+              </div>
+            </div>
+	  </div>
+      
+          <ion-button class="ion-margin-bottom" size="small" type="submit" expand="block" (click)="registrar()">Registrarme</ion-button>
+	  <div class="ion-text-center">
+            <a routerLink="/login" class="text-center">¿Ya tenés una cuenta creada? Ingresá.</a>
+	  </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

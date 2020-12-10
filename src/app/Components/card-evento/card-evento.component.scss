@@ -1,0 +1,50 @@
+.event {
+  &-img_container {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      padding-bottom: 56.25%;
+    }
+  }
+
+  &-img {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.evento-more{
+    font-size: 25px !important;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+}
+
+.Aceptado{
+    --background: green;
+    border-radius: 5px;
+    color:white;
+}
+
+ion-toolbar{
+    --background: transparent;
+}
+
+.esperando{
+    --background: yellow;
+    border-radius: 5px;
+    color: black;
+}
+
+.Rechazado{
+    --background: red;
+    border-radius: 5px;
+    color:white;
+}

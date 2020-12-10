@@ -1,0 +1,7 @@
+{
+  "name": "Johrei Argentina",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
