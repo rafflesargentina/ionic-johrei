@@ -60,6 +60,7 @@ export class FormUsuarioPage implements OnInit {
           frequenter: [null],
           last_name : ["", Validators.required],
           member: [null],
+          membership: ["frequenter", Validators.required]
       })  
   }
 
@@ -91,9 +92,10 @@ export class FormUsuarioPage implements OnInit {
           document_number: this.usuario.document_number,
           email: this.usuario.email,
           first_name: this.usuario.first_name,
-          frequenter: !!this.usuario.frequenter,
+          frequenter: this.usuario.frequenter,
           last_name: this.usuario.last_name,
-          member: !!this.usuario.member
+          member: this.usuario.member,
+          membership: this.usuario.member ? "member" : "frequenter"
       })
 
       this.googleMapsService.setAddressForm(this.f.address)
@@ -135,19 +137,19 @@ export class FormUsuarioPage implements OnInit {
       })
   }
 
-  //cambio(event){
-  //if(event.detail.value === 'member'){
-  //this.datosForm.patchValue({
-  //member: true,
-  //frequenter: false
-  //});
-  //}else{
-  //this.datosForm.patchValue({
-  //frequenter: true,
-  //member: false
-  //});
-  //}
-  //}
+  switchMembership (value) {
+      if (value === "member"){
+          this.datosForm.patchValue({
+              member: true,
+              frequenter: false
+          })
+      } else {
+          this.datosForm.patchValue({
+              frequenter: true,
+              member: false
+          })
+      }
+  }
 
   async cambiarPassword() {
       const modal = await this.modalController.create({

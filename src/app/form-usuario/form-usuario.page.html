@@ -145,14 +145,14 @@
             </div>
           </ion-item>
       
-          <!--tipo de usuario-->
+	  <!-- Membresía -->
           <div>
-            <ion-radio-group value="frequenter">
-              <ion-item >
+            <ion-radio-group formControlName="membership">
+              <ion-item (click)="switchMembership('member')">
                 <ion-label>Miembro</ion-label>
                 <ion-radio slot="end" value="member"></ion-radio>
               </ion-item>
-              <ion-item >
+              <ion-item (click)="switchMembership('frequenter')">
                 <ion-label>Frecuentador</ion-label>
                 <ion-radio slot="end" value="frequenter"></ion-radio>
               </ion-item>
