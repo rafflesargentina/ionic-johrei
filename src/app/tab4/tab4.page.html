@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Planillas'" [icono]="'menu'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!--Refresher-->
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+    <div *ngIf="items.length === 0" class="content-placeholder">
+      <p>No hay novedades para mostrar.</p>
+    </div>
+
+    <ion-list *ngFor="let planilla of items" class="ion-margin-bottom">
+      
+      <ion-item>
+        <ion-label>{{planilla.date}}</ion-label>
+      </ion-item>
+      
+    </ion-list>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregar()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--Infinite-Scroll-->
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)" [disabled]="isDisabled">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

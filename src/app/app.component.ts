@@ -67,6 +67,10 @@ export class AppComponent implements OnInit {
         this.router.navigate(["form-usuario"]) 
     }
 
+    verAncestros(){
+        this.router.navigate(["list-ancestors"])  
+    }
+
     login() {
         this.router.navigate(["login"])
     }

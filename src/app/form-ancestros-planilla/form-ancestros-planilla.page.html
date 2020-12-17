@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Ancestros'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col>Nombre</ion-col>
+    <ion-col>Relación</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let ancestro of planilla.ancestors;let i = index">
+    <ion-col>{{ancestro.name}}</ion-col>
+    <ion-col>{{ancestro.relationship}}</ion-col>
+    <ion-button *ngIf="canUpdate" fill="clear" (click)="editar(i,ancestro)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-row>
+  <ion-button *ngIf="canUpdate" type="submit"  color="light" (click)="cancelar()">
+    <ion-label>Cancelar</ion-label>
+  </ion-button> 
+  <ion-button *ngIf="canUpdate" type="submit"  color="success" (click)="guardar()">
+    <ion-label>Enviar</ion-label>
+  </ion-button> 
+   <!--boton flotante para agregar items si es administrador-->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregar()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
