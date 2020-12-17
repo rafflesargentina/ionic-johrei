@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AncestorsService } from '../Services/ancestors.service';
 
 import values from "lodash"
 import { NavigationEnd, Router } from '@angular/router';
@@ -20,7 +19,6 @@ export class ListAncestorsPage implements OnInit {
   private paginaActual = 0;
 
   constructor(
-    private ancestorsService:AncestorsService,
     private router:Router,
     private parametrosService:ParametrosService,
     private alertController:AlertController
@@ -51,19 +49,7 @@ export class ListAncestorsPage implements OnInit {
         perPage: 5
     }
 
-    this.ancestorsService.getAll(params).subscribe( (resp:any) =>{
-        values(resp.data.data).forEach(element => {
-            
-            this.items.push(element)
-        })
     
-        if(event){
-            event.target.complete()
-            if(resp.length === 0){
-                this.isDisabled = false
-            }
-        }
-    })
   }
 
   recargar(event){
@@ -105,10 +91,7 @@ export class ListAncestorsPage implements OnInit {
               name:data.name,
               relationship: data.relationship
             }
-            this.ancestorsService.createOne().subscribe(data=>{
-              console.log(data);
-              this.siguientes(undefined,true);
-            })
+        
           }
         }
       ]

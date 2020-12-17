@@ -35,10 +35,11 @@ export class FormAncestroPage implements OnInit {
 
   ngOnInit() {
     if(this.navParams.get("ancestro")){
+      let a = this.navParams.get("ancestro");
       this.titulo = "Edición Ancestro";
-      this.ancestro.asignarValores(this.navParams.get("ancestro"))
-      this.datosForm.patchValue({name: this.ancestro.name});
-      this.datosForm.patchValue({relationship:this.ancestro.relationship});
+      this.datosForm.patchValue({id: a.id});
+      this.datosForm.patchValue({name: a.name});
+      this.datosForm.patchValue({relationship:a.relationship});
     }
   }
 
@@ -52,8 +53,7 @@ export class FormAncestroPage implements OnInit {
       return this.toastService.mensaje("Atención", "Por favor completar todos los campos solicitados", "danger")
     }
 
-    this.ancestro.asignarValores(this.datosForm.value)
-    this.modalCtrl.dismiss(this.ancestro);
+    this.modalCtrl.dismiss(this.datosForm.value);
   }
 
   cancelar(){

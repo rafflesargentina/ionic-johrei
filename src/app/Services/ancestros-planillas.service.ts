@@ -12,6 +12,6 @@ export class AncestrosPlanillasService extends BaseCRUDService {
   ) {
       super(httpClient)
 
-      this.setEndpoint("ancestors-sheets")
+      this.setEndpoint("sheets")
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AncestorsService } from '../Services/ancestors.service';
-
 import { ParametrosService } from '../Services/global/parametros.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { FormAncestroPage } from '../form-ancestro/form-ancestro.page';
 import { PlanillaAncestros } from '../models/planillaAncestros';
+import { AncestrosPlanillasService } from '../Services/ancestros-planillas.service';
+import { ToastService } from '../Services/toast.service';
 
 
 @Component({
@@ -21,22 +21,36 @@ export class FormAncestrosPlanillaPage implements OnInit {
   public canUpdate = true;
 
   constructor(
-    private ancestorsService:AncestorsService,
+    private ancestorsPlanillaService:AncestrosPlanillasService,
     private parametrosService:ParametrosService,
     private modalCtrl:ModalController,
-    private navCtrl:NavController
+    private navCtrl:NavController,
+    private toastService:ToastService 
   ) { }
 
   ngOnInit() {
-    this.planilla = new PlanillaAncestros();
 
-    if(this.parametrosService.param && this.parametrosService.param.planilla){
-      this.updating = true;
-      this.planilla.asignarValores(this.parametrosService.param.planilla.ancestors);
-    }
+    this.planilla = new PlanillaAncestros();
 
     //Ver si ya paso el segundo sábado del mes y setear canupdate
 
+  }
+
+  ionViewDidEnter(){
+    
+    this.planilla = new PlanillaAncestros();
+
+    this.toastService.mensaje("Atención","Solo es posible modificar las planillas del mes en curso hasta el segundo sábado inclusive.","warning")
+
+    if(this.parametrosService.param){
+      this.updating = true;
+      this.canUpdate = this.parametrosService.param.planilla.canEdit;
+      this.planilla.asignarValores(this.parametrosService.param.planilla);
+      console.log(this.planilla)
+    }
+    else{
+
+    }
   }
 
   async editar(index,item){
@@ -80,14 +94,17 @@ export class FormAncestrosPlanillaPage implements OnInit {
   }
 
   guardar(){
+
+    console.log(this.planilla)
     if(this.updating){
-      this.ancestorsService.updateOne(this.planilla).subscribe(data=>{
+      this.ancestorsPlanillaService.updateOne(this.planilla.id,{},this.planilla).subscribe(data=>{
         console.log(data);
         this.navCtrl.back();
       })
     }
     else{
-      this.ancestorsService.createOne(this.planilla).subscribe(data=>{
+      console.log(this.planilla)
+      this.ancestorsPlanillaService.createOne({},this.planilla).subscribe(data=>{
         console.log(data);
         this.navCtrl.back();
       })

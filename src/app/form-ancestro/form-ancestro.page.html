@@ -7,7 +7,7 @@
 <ion-content>
   <form [formGroup]="datosForm">
     <ion-item [class.invalid]="submitted && !datosForm.controls.name.valid">
-      <ion-label position="floating">Nombre</ion-label>
+      <ion-label position="floating">Rama familiar o nombre del antepasado</ion-label>
       <ion-input name="content" type="text" formControlName="name" required></ion-input>
       <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
         <div *ngIf="f.name.errors.required">
@@ -16,7 +16,7 @@
       </div>
     </ion-item>
     <ion-item [class.invalid]="submitted && !datosForm.controls.relationship.valid">
-      <ion-label position="floating">Relación</ion-label>
+      <ion-label position="floating">Parentesco</ion-label>
       <ion-input name="relationship" type="text" formControlName="relationship" required></ion-input>
       <div *ngIf="submitted && f.relationship.errors" class="invalid-feedback">
         <div *ngIf="f.relationship.errors.required">

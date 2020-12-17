@@ -74,14 +74,9 @@ export class Tab4Page implements OnInit {
       })
   }
 
-  async verDetalles(item){
-      const modal = await this.modalCtrl.create({
-          component: DetailEsencialPage,
-          componentProps: {
-              "esencial": item, 
-          }
-      })
-      return await modal.present()
+  async editar(item){
+    this.parametrosService.param = {planilla : item};  
+    this.router.navigate(['/form-ancestros-planilla'])
   }
 
   recargar(event){
@@ -91,6 +86,7 @@ export class Tab4Page implements OnInit {
   }
 
   agregar(){
+    this.parametrosService.param = undefined;  
     this.router.navigate(['/form-ancestros-planilla'])
   }
 }
