@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <app-header [titulo]="'Mis Ancestros'" [icono]="'back'"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+   <!--Refresher-->
+   <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-row>
+    <ion-col>Nombre</ion-col>
+    <ion-col>Relación</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let ancestro of items;let i = index">
+    <ion-col>{{ancestro.name}}</ion-col>
+    <ion-col>{{ancestro.relationship}}</ion-col>
+    <ion-button *ngIf="canUpdate" fill="clear" (click)="editar(i,ancestro)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+    <!--ion-button *ngIf="canUpdate" fill="clear" (click)="eliminar(ancestro)">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button-->
+  </ion-row>
+   <!--boton flotante para agregar items si es administrador-->
+  <ion-fab *ngIf="canUpdate" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregar()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

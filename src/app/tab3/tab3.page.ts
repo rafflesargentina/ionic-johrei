@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core"
 import { ModalController } from "@ionic/angular"
 import { NavigationEnd, Router } from "@angular/router"
-
-import { Document } from "../models/document"
 import { AuthService } from "src/app/Services/authentication/auth.service"
 import { DocumentosService } from "../Services/documentos.service"
 import { ParametrosService } from "../Services/global/parametros.service"
@@ -37,7 +35,6 @@ export class Tab3Page implements OnInit {
           if (event instanceof NavigationEnd) {
 	      if (event.url.includes("tabs/tab3")) {
                   this.items = []
-
                   this.siguientes()
 	      }    
           }

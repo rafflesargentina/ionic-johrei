@@ -79,18 +79,23 @@ const routes: Routes = [
     {
         path: "detail-esencial",
         loadChildren: () => import("./detail-esencial/detail-esencial.module").then( m => m.DetailEsencialPageModule)
-    },  {
-    path: 'list-ancestors',
-    loadChildren: () => import('./list-ancestors/list-ancestors.module').then( m => m.ListAncestorsPageModule)
-  },
-  {
-    path: 'form-ancestro',
-    loadChildren: () => import('./form-ancestro/form-ancestro.module').then( m => m.FormAncestroPageModule)
-  },
-  {
-    path: 'form-ancestros-planilla',
-    loadChildren: () => import('./form-ancestros-planilla/form-ancestros-planilla.module').then( m => m.FormAncestrosPlanillaPageModule)
-  },
+    },
+    {
+        path: "list-ancestors",
+        loadChildren: () => import("./list-ancestors/list-ancestors.module").then( m => m.ListAncestorsPageModule)
+    },
+    {
+        path: "form-ancestro",
+        loadChildren: () => import("./form-ancestro/form-ancestro.module").then( m => m.FormAncestroPageModule)
+    },
+    {
+        path: "form-ancestros-planilla",
+        loadChildren: () => import("./form-ancestros-planilla/form-ancestros-planilla.module").then( m => m.FormAncestrosPlanillaPageModule)
+    },
+    {
+        path: "list-mis-ancestros",
+        loadChildren: () => import("./list-mis-ancestros/list-mis-ancestros.module").then( m => m.ListMisAncestrosPageModule)
+    },
 
 
 ]

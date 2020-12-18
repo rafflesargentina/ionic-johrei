@@ -11,13 +11,12 @@
   </ion-refresher>
 
     <div *ngIf="items.length === 0" class="content-placeholder">
-      <p>No hay novedades para mostrar.</p>
+      <p>No hay planillas para mostrar.</p>
     </div>
 
-    <ion-list *ngFor="let planilla of items" class="ion-margin-bottom">
-      
-
-      <ion-item  >
+    <ion-list *ngFor="let chunk of items" class="ion-margin-bottom">
+      <ion-list-header><h3>{{chunk[0].user.name}}</h3></ion-list-header>
+      <ion-item  *ngFor="let planilla of chunk" >
         <ion-label>{{planilla.date | date: "MMMM 'de' yyyy"}}</ion-label> 
         <ion-button fill="clear" (click)="editar(planilla)">
           <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
@@ -25,8 +24,7 @@
         <ion-button *ngIf="planilla.canEdit" fill="clear" (click)="editar(planilla)">
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-button>
-      </ion-item>
-      
+      </ion-item>      
     </ion-list>
 
 

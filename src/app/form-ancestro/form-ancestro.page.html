@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <app-header [titulo]="'Ancestros'"></app-header>
+    <app-header [titulo]="titulo"></app-header>
   </ion-toolbar>
 </ion-header>
 
@@ -24,11 +24,13 @@
         </div>
       </div>
     </ion-item>
-  </form>
-  <ion-button  color="light" (click)="cancelar()">
-    <ion-label>Cancelar</ion-label>
-  </ion-button> 
-  <ion-button type="submit" color="success" (click)="guardar()">
-    <ion-label>Guardar</ion-label>
-  </ion-button>
+  </form>  
+  <ion-toolbar class="ion-padding"> 
+    <ion-button slot="start"  color="light" (click)="cancelar()">
+      <ion-label>Cancelar</ion-label>
+    </ion-button> 
+    <ion-button slot="end"  color="success" (click)="guardar()">
+      <ion-label>Enviar</ion-label>
+    </ion-button> 
+  </ion-toolbar>
 </ion-content>

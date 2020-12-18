@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing"
 
-import { AncestrosPlanillasService } from './ancestros-planillas.service';
+import { AncestrosPlanillasService } from "./ancestros-planillas.service"
 
-describe('AncestrosPlanillasService', () => {
-  let service: AncestrosPlanillasService;
+describe("AncestrosPlanillasService", () => {
+    let service: AncestrosPlanillasService
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(AncestrosPlanillasService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({})
+        service = TestBed.inject(AncestrosPlanillasService)
+    })
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    it("should be created", () => {
+        expect(service).toBeTruthy()
+    })
+})

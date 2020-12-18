@@ -4,9 +4,9 @@ import { FormsModule } from "@angular/forms"
 
 import { IonicModule } from "@ionic/angular"
 
-import { FormAncestrosPlanillaPageRoutingModule } from "./form-ancestros-planilla-routing.module"
+import { ListMisAncestrosPageRoutingModule } from "./list-mis-ancestros-routing.module"
 
-import { FormAncestrosPlanillaPage } from "./form-ancestros-planilla.page"
+import { ListMisAncestrosPage } from "./list-mis-ancestros.page"
 import { ComponentsModule } from "../Components/components.module"
 
 @NgModule({
@@ -15,8 +15,8 @@ import { ComponentsModule } from "../Components/components.module"
         ComponentsModule,
         FormsModule,
         IonicModule,
-        FormAncestrosPlanillaPageRoutingModule
+        ListMisAncestrosPageRoutingModule
     ],
-    declarations: [FormAncestrosPlanillaPage]
+    declarations: [ListMisAncestrosPage]
 })
-export class FormAncestrosPlanillaPageModule {}
+export class ListMisAncestrosPageModule {}

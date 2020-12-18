@@ -5,13 +5,12 @@ import { BaseCRUDService } from "./base-crud.service"
 @Injectable({
     providedIn: "root"
 })
+export class AncestorsService extends BaseCRUDService {
 
-export class AncestrosPlanillasService extends BaseCRUDService {
     constructor(
     public httpClient:HttpClient
     ) {
         super(httpClient)
-
-        this.setEndpoint("sheets")
+        this.setEndpoint("ancestors")
     }
 }

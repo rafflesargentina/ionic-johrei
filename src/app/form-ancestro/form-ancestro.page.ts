@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, NavParams } from '@ionic/angular';
-import { Ancestro } from '../models/ancestro';
-import { ToastService } from '../Services/toast.service';
+import { Component, OnInit } from "@angular/core"
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { ModalController, NavParams } from "@ionic/angular"
+import { Ancestro } from "../models/ancestro"
+import { ToastService } from "../Services/toast.service"
 
 @Component({
-  selector: 'app-form-ancestro',
-  templateUrl: './form-ancestro.page.html',
-  styleUrls: ['./form-ancestro.page.scss'],
+    selector: "app-form-ancestro",
+    templateUrl: "./form-ancestro.page.html",
+    styleUrls: ["./form-ancestro.page.scss"],
 })
 export class FormAncestroPage implements OnInit {
 
@@ -23,41 +23,41 @@ export class FormAncestroPage implements OnInit {
     public toastService:ToastService
   ) { 
     
-    this.datosForm = this.formBuilder.group({
-      id : ["", null],
-      name:["", Validators.required],
-      relationship: ["", Validators.required],
-    })
+      this.datosForm = this.formBuilder.group({
+          id : ["", null],
+          name:["", Validators.required],
+          relationship: ["", Validators.required],
+      })
 
-    this.ancestro = new Ancestro();
+      this.ancestro = new Ancestro()
 
   }
 
   ngOnInit() {
-    if(this.navParams.get("ancestro")){
-      let a = this.navParams.get("ancestro");
-      this.titulo = "Edición Ancestro";
-      this.datosForm.patchValue({id: a.id});
-      this.datosForm.patchValue({name: a.name});
-      this.datosForm.patchValue({relationship:a.relationship});
-    }
+      if(this.navParams.get("ancestro")){
+          const a = this.navParams.get("ancestro")
+          this.titulo = "Editar Ancestro"
+          this.datosForm.patchValue({id: a.id})
+          this.datosForm.patchValue({name: a.name})
+          this.datosForm.patchValue({relationship:a.relationship})
+      }
   }
 
   get f() { return this.datosForm.controls }
 
   guardar(){
 
-    this.submitted = true;
+      this.submitted = true
 
-    if (this.datosForm.invalid) {
-      return this.toastService.mensaje("Atención", "Por favor completar todos los campos solicitados", "danger")
-    }
+      if (this.datosForm.invalid) {
+          return this.toastService.mensaje("Atención", "Por favor completar todos los campos solicitados", "danger")
+      }
 
-    this.modalCtrl.dismiss(this.datosForm.value);
+      this.modalCtrl.dismiss(this.datosForm.value)
   }
 
   cancelar(){
-    this.modalCtrl.dismiss();
+      this.modalCtrl.dismiss()
   }
 
 }

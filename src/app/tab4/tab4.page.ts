@@ -1,14 +1,9 @@
 import { Component, OnInit } from "@angular/core"
 import { ModalController } from "@ionic/angular"
 import { NavigationEnd, Router } from "@angular/router"
-
-import { Document } from "../models/document"
 import { AuthService } from "src/app/Services/authentication/auth.service"
-import { DocumentosService } from "../Services/documentos.service"
 import { ParametrosService } from "../Services/global/parametros.service"
-
 import values from "lodash"
-import { DetailEsencialPage } from "../detail-esencial/detail-esencial.page"
 import { AncestrosPlanillasService } from "../Services/ancestros-planillas.service"
 
 @Component({
@@ -23,6 +18,7 @@ export class Tab4Page implements OnInit {
   public items = [];
 
   private paginaActual = 0;
+  private listing="mine";
 
   constructor(
     private authService:AuthService,
@@ -32,15 +28,21 @@ export class Tab4Page implements OnInit {
     private router:Router,
   ) { 
       this.isAdmin = this.authService.isAdmin()
+      if(this.isAdmin){
+          this.listing = "all"
+      }
+      else{
+          this.listing = "mine"
+      }
+      
 
       // Subscribe to router events.
       this.router.events.subscribe(event => {
           if (event instanceof NavigationEnd) {
-	      if (event.url.includes("tabs/tab4")) {
+              if (event.url.includes("tabs/tab4")) {
                   this.items = []
-
                   this.siguientes()
-	      }    
+              }    
           }
       })	
   }	
@@ -56,12 +58,13 @@ export class Tab4Page implements OnInit {
 
       const params={
           page:this.paginaActual,
-          perPage: 5
+          perPage: 5,
+          listing:this.listing
       }
 
       this.ancestrolsPlanillasService.getAll(params).subscribe((resp:any) =>{
           const data = resp.data.data
-          values(data).forEach(element => {
+          values(data).forEach(element => {              
               this.items.push(element)
           })
       
@@ -75,8 +78,8 @@ export class Tab4Page implements OnInit {
   }
 
   async editar(item){
-    this.parametrosService.param = {planilla : item};  
-    this.router.navigate(['/form-ancestros-planilla'])
+      this.parametrosService.param = {planilla : item}  
+      this.router.navigate(["/form-ancestros-planilla"])
   }
 
   recargar(event){
@@ -86,7 +89,7 @@ export class Tab4Page implements OnInit {
   }
 
   agregar(){
-    this.parametrosService.param = undefined;  
-    this.router.navigate(['/form-ancestros-planilla'])
+      this.parametrosService.param = undefined  
+      this.router.navigate(["/form-ancestros-planilla"])
   }
 }
