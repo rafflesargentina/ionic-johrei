@@ -21,6 +21,16 @@ const routes: Routes = [
         pathMatch: "full"
     },
     {
+        path: "tab3",
+        redirectTo: "tabs/tab3",
+        pathMatch: "full"
+    },
+    {
+        path: "tab4",
+        redirectTo: "tabs/tab4",
+        pathMatch: "full"
+    },
+    {
         path: "login",
         loadChildren: () => import("./login/login.module").then( m => m.LoginPageModule),
         canActivate: [RedirectIfAuthenticatedService]
@@ -35,25 +45,19 @@ const routes: Routes = [
         loadChildren: () => import("./recortar-imagen/recortar-imagen.module").then( m => m.RecortarImagenPageModule),
         canActivate: [RedirectIfNotAuthenticatedService]
     },
-    /*{
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [RedirectIfNotAuthenticatedService]
-  },*/
-   
     {
         path: "form-registro",
         loadChildren: () => import("./form-registro/form-registro.module").then( m => m.FormRegistroPageModule),
         canActivate: [RedirectIfAuthenticatedService]
     },
     {
-        path: "form-noticias",
-        loadChildren: () => import("./form-noticias/form-noticias.module").then( m => m.FormNoticiasPageModule),
+        path: "form-noticia",
+        loadChildren: () => import("./form-noticia/form-noticia.module").then( m => m.FormNoticiaPageModule),
         canActivate: [RedirectIfNotAuthenticatedService]
     },
     {
-        path: "form-eventos",
-        loadChildren: () => import("./form-eventos/form-eventos.module").then( m => m.FormEventosPageModule),
+        path: "form-evento",
+        loadChildren: () => import("./form-evento/form-evento.module").then( m => m.FormEventoPageModule),
         canActivate: [RedirectIfNotAuthenticatedService]
     },
     {
@@ -81,23 +85,17 @@ const routes: Routes = [
         loadChildren: () => import("./detail-esencial/detail-esencial.module").then( m => m.DetailEsencialPageModule)
     },
     {
-        path: "list-ancestors",
-        loadChildren: () => import("./list-ancestors/list-ancestors.module").then( m => m.ListAncestorsPageModule)
-    },
-    {
         path: "form-ancestro",
         loadChildren: () => import("./form-ancestro/form-ancestro.module").then( m => m.FormAncestroPageModule)
     },
     {
-        path: "form-ancestros-planilla",
-        loadChildren: () => import("./form-ancestros-planilla/form-ancestros-planilla.module").then( m => m.FormAncestrosPlanillaPageModule)
+        path: "form-planilla",
+        loadChildren: () => import("./form-planilla/form-planilla.module").then( m => m.FormPlanillaPageModule)
     },
     {
         path: "list-mis-ancestros",
         loadChildren: () => import("./list-mis-ancestros/list-mis-ancestros.module").then( m => m.ListMisAncestrosPageModule)
-    },
-
-
+    }
 ]
 
 @NgModule({

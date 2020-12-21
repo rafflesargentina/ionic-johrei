@@ -56,11 +56,11 @@ export class AppComponent implements OnInit {
     }
 
     cargarNoticia(){
-        this.router.navigate(["form-noticias"]) 
+        this.router.navigate(["form-noticia"]) 
     }
 
     cargarEventos(){
-        this.router.navigate(["form-eventos"]) 
+        this.router.navigate(["form-evento"]) 
     }
 
     editarUsuario(){

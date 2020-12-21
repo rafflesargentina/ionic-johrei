@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core"
-import { Evento } from "src/app/models/evento"
-import { EventosService } from "src/app/Services/eventos.service"
+import { ModalController } from "@ionic/angular"
 import { Router } from "@angular/router"
-import { ParametrosService } from "src/app/Services/global/parametros.service"
-import { ModalController} from "@ionic/angular"
-import { DetailEventoPage } from "src/app/detail-evento/detail-evento.page"
 
 import { AuthService } from "src/app/Services/authentication/auth.service"
+import { DetailEventoPage } from "src/app/detail-evento/detail-evento.page"
+import { Evento } from "src/app/models/evento"
+import { EventoService } from "src/app/Services/evento.service"
+import { ParametroService } from "src/app/Services/global/parametro.service"
 
 @Component({
     selector: "app-card-evento",
@@ -27,10 +27,10 @@ export class CardEventoComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
+    private eventoService:EventoService,
     private modalCtrl: ModalController,
-    private eventoService:EventosService,
-    private router: Router,
-    private parametrosService: ParametrosService,
+    private parametroService: ParametroService,
+    private router: Router
   ) { 
       this.isAdmin = this.authService.isAdmin()
   }
@@ -78,8 +78,8 @@ export class CardEventoComponent implements OnInit {
 
   
   editarEvento() {
-      this.parametrosService.param = {evento: this.data}
-      this.router.navigate(["form-eventos"])
+      this.parametroService.param = {evento: this.data}
+      this.router.navigate(["form-evento"])
   }
 
   async mostrarDetalles() {

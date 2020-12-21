@@ -1,17 +1,13 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 
-import { Document } from "src/app/models/document"
 import { BaseCRUDService } from "./base-crud.service"
 
 @Injectable({
     providedIn: "root"
 })
 
-export class DocumentosService extends BaseCRUDService {
-  documento:Document = new Document();
-  documentos: Document[] = [];
-
+export class DocumentoService extends BaseCRUDService {
   constructor(
     public httpClient:HttpClient
   ) {

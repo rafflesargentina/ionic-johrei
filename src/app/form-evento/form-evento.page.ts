@@ -1,22 +1,21 @@
 import { ActivatedRoute, Router } from "@angular/router"
 import { Component, OnInit, Input } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
-import { ModalController, AlertController, NavController } from "@ionic/angular"
+import { AlertController, NavController } from "@ionic/angular"
 
-import { Evento } from "../models/evento"
-import { EventosService } from "../Services/eventos.service"
-import { ToastService } from "../Services/toast.service"
-import { LoadingService } from "../Services/loading.service"
-import { ParametrosService } from "../Services/global/parametros.service"
 import { AuthService } from "../Services/authentication/auth.service"
+import { Evento } from "../models/evento"
+import { EventoService } from "../Services/evento.service"
+import { ParametroService } from "../Services/global/parametro.service"
+import { ToastService } from "../Services/toast.service"
 
 @Component({
-    selector: "app-form-eventos",
-    templateUrl: "./form-eventos.page.html",
-    styleUrls: ["./form-eventos.page.scss"],
+    selector: "app-form-evento",
+    templateUrl: "./form-evento.page.html",
+    styleUrls: ["./form-evento.page.scss"],
 })
 
-export class FormEventosPage implements OnInit {
+export class FormEventoPage implements OnInit {
   @Input() dismissFirstModal;
   
   public datosForm: FormGroup;
@@ -28,17 +27,15 @@ export class FormEventosPage implements OnInit {
   public titulo = "Nuevo Evento";
 
   constructor(
+    private alertController: AlertController,
     private authService:AuthService,
+    private eventoService: EventoService,
     private formBuilder: FormBuilder,
-    private eventosService: EventosService,
+    private navCtrl: NavController,
+    private parametroService: ParametroService,
     private route: ActivatedRoute,
     private router: Router,
-    private modalCtrl: ModalController,
-    private toastService: ToastService,
-    private alertController: AlertController,
-    private loadingService: LoadingService,
-    private parametrosService: ParametrosService,
-    private navCtrl: NavController,
+    private toastService: ToastService
   ) {
       this.datosForm = this.formBuilder.group({
           id : ["", null],
@@ -53,14 +50,16 @@ export class FormEventosPage implements OnInit {
       this.evento = new Evento()
   }
 
-  ngOnInit():void {}
+  ngOnInit():void {
+    return
+  }
 
   ionViewDidEnter(){  
-      if(this.parametrosService.param.evento) {
+      if(this.parametroService.param.evento) {
           this.isEditando = true
-          console.log("parametros", this.parametrosService.param)
-          this.evento = this.parametrosService.param.evento
-          this.datosForm.patchValue(this.parametrosService.param.evento)
+          console.log("parametros", this.parametroService.param)
+          this.evento = this.parametroService.param.evento
+          this.datosForm.patchValue(this.parametroService.param.evento)
       }
  
       if (this.isEditando){
@@ -91,9 +90,9 @@ export class FormEventosPage implements OnInit {
 
       if(this.isEditando){
           const id = this.datosForm.value.id
-          this.eventosService.updateOne(id, {}, this.datosForm.value).subscribe((resp:any) =>{
+          this.eventoService.updateOne(id, {}, this.datosForm.value).subscribe((resp:any) =>{
               if(this.foto){
-                  this.eventosService.uploadImagen(id,this.foto)
+                  this.eventoService.uploadImagen(id,this.foto)
               }
 
               this.toastService.mensaje("Eventos", "Evento actualizado")
@@ -101,13 +100,13 @@ export class FormEventosPage implements OnInit {
               this.navCtrl.back()
           })
       }else{      
-          this.eventosService.createOne({}, this.datosForm.value).subscribe((resp:any) =>{
+          this.eventoService.createOne({}, this.datosForm.value).subscribe((resp:any) =>{
               this.isEditando = true 
 
               const eventoId = resp.data[0].id
 
               if(this.foto){
-                  this.eventosService.uploadImagen(eventoId,this.foto)
+                  this.eventoService.uploadImagen(eventoId,this.foto)
               }
 
               this.toastService.mensaje("Eventos", "Evento registrado")
@@ -116,7 +115,7 @@ export class FormEventosPage implements OnInit {
           })
       }   
 
-      this.parametrosService.param = ""
+      this.parametroService.param = ""
   }
 
   async clickIcono($event){
@@ -158,7 +157,7 @@ export class FormEventosPage implements OnInit {
 
   eliminarEvento(){
       const id = this.datosForm.value.id
-      this.eventosService.deleteOne(id).subscribe(()=>{
+      this.eventoService.deleteOne(id).subscribe(()=>{
           this.navCtrl.back()
       })
   }

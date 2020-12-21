@@ -1,30 +1,34 @@
 import { Component, OnInit } from "@angular/core"
-import values from "lodash"
-import { AuthService } from "../Services/authentication/auth.service"
 import { NavigationEnd, Router } from "@angular/router"
 import { ModalController } from "@ionic/angular"
+
+import { AuthService } from "../Services/authentication/auth.service"
+import { AncestroService } from "../Services/ancestro.service"
 import { FormAncestroPage } from "../form-ancestro/form-ancestro.page"
-import { AncestorsService } from "../Services/ancestors.service"
+
+import values from "lodash"
 
 @Component({
     selector: "app-list-mis-ancestros",
     templateUrl: "./list-mis-ancestros.page.html",
     styleUrls: ["./list-mis-ancestros.page.scss"],
 })
+
 export class ListMisAncestrosPage implements OnInit {
 
+  public canUpdate = true;
   public isAdmin = false;
   public isDisabled = true;
   public items = [];
   public updating = false;
-  public canUpdate = true;
+
   private paginaActual = 0;
 
   constructor(
-    private ancestrosService:AncestorsService,
+    private ancestroService:AncestroService,
     private authService:AuthService,
-    private router:Router,
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -64,7 +68,7 @@ export class ListMisAncestrosPage implements OnInit {
           perPage: 20
       }
 
-      this.ancestrosService.getAll(params).subscribe((resp:any) =>{
+      this.ancestroService.getAll(params).subscribe((resp:any) =>{
           const data = resp.data.data
           values(data).forEach(element => {
               this.items.push(element)
@@ -91,7 +95,7 @@ export class ListMisAncestrosPage implements OnInit {
           .then((retorno) => {
               console.log(retorno)
               if(retorno.data){     
-                  this.ancestrosService.updateOne(retorno.data.id,{},retorno.data).subscribe(data=>{
+                  this.ancestroService.updateOne(retorno.data.id,{},retorno.data).subscribe(data=>{
                       this.recargar(undefined)
                   })
         
@@ -112,7 +116,7 @@ export class ListMisAncestrosPage implements OnInit {
           .then((retorno) => {
               console.log(retorno)
               if(retorno.data){     
-                  this.ancestrosService.createOne({},retorno.data).subscribe(data=>{
+                  this.ancestroService.createOne({},retorno.data).subscribe(data=>{
                       this.recargar(undefined)
                   })
               }        
@@ -121,7 +125,7 @@ export class ListMisAncestrosPage implements OnInit {
   } 
 
   eliminar(item){
-      this.ancestrosService.deleteOne(item.id,{},item).subscribe(data=>{
+      this.ancestroService.deleteOne(item.id,{},item).subscribe(data=>{
           this.recargar(undefined)
       })
   }

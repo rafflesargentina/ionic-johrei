@@ -1,19 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core"
-import { Article } from "../models/article"
+import { Component, Input, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
-import { ToastService } from "../Services/toast.service"
-import { ParametrosService } from "../Services/global/parametros.service"
-import { ModalController, NavController, AlertController } from "@ionic/angular"
+import { NavController, AlertController } from "@ionic/angular"
+
+import { Article } from "../models/article"
 import { AuthService } from "src/app/Services/authentication/auth.service"
-import { LoadingService } from "../Services/loading.service"
-import { NoticiasService } from "../Services/noticias.service"
+import { ParametroService } from "../Services/global/parametro.service"
+import { NoticiaService } from "../Services/noticia.service"
+import { ToastService } from "../Services/toast.service"
 
 @Component({
-    selector: "app-form-noticias",
-    templateUrl: "./form-noticias.page.html",
-    styleUrls: ["./form-noticias.page.scss"],
+    selector: "app-form-noticia",
+    templateUrl: "./form-noticia.page.html",
+    styleUrls: ["./form-noticia.page.scss"],
 })
-export class FormNoticiasPage implements OnInit {
+
+export class FormNoticiaPage implements OnInit {
   @Input() dismissFirstModal;
   
   noticia: Article;
@@ -35,12 +36,10 @@ export class FormNoticiasPage implements OnInit {
     private authService:AuthService,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private parametrosService: ParametrosService,
-    private modalController: ModalController,
+    private parametroService: ParametroService,
     private navCtrl: NavController,
-    private loadingService: LoadingService,
     private alertController: AlertController,
-    private noticiaService: NoticiasService,
+    private noticiaService: NoticiaService,
   ) { 
       this.datosForm = this.formBuilder.group({
           id: [""],
@@ -56,14 +55,14 @@ export class FormNoticiasPage implements OnInit {
   ngOnInit():void {}
 
   ionViewDidEnter(){
-      if(this.parametrosService.param.noticia) {
+      if(this.parametroService.param.noticia) {
           this.isEditing = true
       
-          this.noticia.asignarValores(this.parametrosService.param.noticia)
+          this.noticia.asignarValores(this.parametroService.param.noticia)
 
           console.log("parametros", this.noticia)
 
-          this.datosForm.patchValue(this.parametrosService.param.noticia)
+          this.datosForm.patchValue(this.parametroService.param.noticia)
       }
 
       if(this.isEditing){
@@ -163,7 +162,7 @@ export class FormNoticiasPage implements OnInit {
           })
       }   
 
-      this.parametrosService.param = ""
+      this.parametroService.param = ""
   }
 
   async clickIcono($event){

@@ -8,7 +8,6 @@ import { Tab4PageRoutingModule } from "./tab4-routing.module"
 
 import { Tab4Page } from "./tab4.page"
 import { ComponentsModule } from "../Components/components.module"
-import { NoticiasService } from "../Services/noticias.service"
 
 @NgModule({
     entryComponents: [], //para manejar los medales de selección
@@ -20,6 +19,5 @@ import { NoticiasService } from "../Services/noticias.service"
         Tab4PageRoutingModule
     ],
     declarations: [Tab4Page],
-    providers: [NoticiasService]
 })
 export class Tab4PageModule {}

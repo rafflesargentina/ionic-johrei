@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core"
-import { ModalController } from "@ionic/angular"
 import { NavigationEnd, Router } from "@angular/router"
 
 import { AuthService } from "src/app/Services/authentication/auth.service"
 import { Evento } from "../models/evento"
-import { EventosService } from "../Services/eventos.service"
-import { ParametrosService } from "../Services/global/parametros.service"
+import { EventoService } from "../Services/evento.service"
+import { ParametroService } from "../Services/global/parametro.service"
 
 import values from "lodash/values"
 
@@ -25,9 +24,8 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private eventosService:EventosService,
-    private modalCtrl:ModalController, //para manejar los modales de seleccion 
-    private parametrosService:ParametrosService,
+    private eventosService:EventoService,
+    private parametroService:ParametroService,
     private router:Router
   ) { 
       this.isAdmin = this.authService.isAdmin()
@@ -97,14 +95,14 @@ export class Tab2Page implements OnInit {
       //console.log('mostrar editar evento', event);
       if(!this.isAdmin){
       //formulario de evento para edición
-          this.parametrosService.param = {evento: event}
-          this.router.navigate(["/form-eventos"])
+          this.parametroService.param = {evento: event}
+          this.router.navigate(["/form-evento"])
       }
   }
 
   agregarEvento(){
-      this.parametrosService.param = {evento: null} //esto está así para que no cargue el último evento editado
-      this.router.navigate(["/form-eventos"])
+      this.parametroService.param = {evento: null} //esto está así para que no cargue el último evento editado
+      this.router.navigate(["/form-evento"])
   }
 
 }

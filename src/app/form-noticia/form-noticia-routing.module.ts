@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core"
 import { Routes, RouterModule } from "@angular/router"
 
-import { FormNoticiasPage } from "./form-noticias.page"
+import { FormNoticiaPage } from "./form-noticia.page"
 
 const routes: Routes = [
     {
         path: "",
-        component: FormNoticiasPage
+        component: FormNoticiaPage
     }
 ]
 
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class FormNoticiasPageRoutingModule {}
+export class FormNoticiaPageRoutingModule {}

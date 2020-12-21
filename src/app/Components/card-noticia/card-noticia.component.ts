@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core"
-import { Article } from "../../models/article"
-import { ActionSheetController, Platform } from "@ionic/angular"
-import { NoticiasService } from "../../Services/noticias.service"
-import { ParametrosService } from "src/app/Services/global/parametros.service"
+import { Component, Input, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 
+import { NoticiaService } from "../../Services/noticia.service"
+import { ParametroService } from "src/app/Services/global/parametro.service"
+
+import { Article } from "../../models/article"
 import { AuthService } from "src/app/Services/authentication/auth.service"
 
 @Component({
@@ -18,34 +18,23 @@ export class CardNoticiaComponent implements OnInit {
   @Input() noticia: Article;
   @Input() i: number;
 
-  public audio = new Audio();
   public isAdmin: boolean;
 
   constructor(
-    private actionSheetCtrl: ActionSheetController,
-    private noticiasservice: NoticiasService,
-    private parametrosService: ParametrosService,
-    private router: Router,
-    private platform: Platform,
-    private authService: AuthService
+    private authService: AuthService,
+    private noticiaService: NoticiaService,
+    private parametroService: ParametroService,
+    private router: Router
   ) { 
       this.isAdmin = this.authService.isAdmin()
   }
 
-  ngOnInit():void {}
+  ngOnInit():void {
+      return
+  }
 
   editarNoticia(){
-      this.parametrosService.param = {noticia: this.noticia}
+      this.parametroService.param = {noticia: this.noticia}
       this.router.navigate(["form-noticias"])  
-  }
-
-  reproducir(){
-      //this.audio.src = this.noticia.urlToSound;
-      //this.audio.load();
-      //this.audio.play();
-  }
-
-  detener(){
-      //this.audio.pause();
   }
 }

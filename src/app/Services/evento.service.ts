@@ -2,8 +2,6 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 
 import { BaseCRUDService } from "./base-crud.service"
-import { Evento } from "../models/evento"
-import { LoadingService } from "./loading.service"
 
 import { tap } from "rxjs/operators"
 
@@ -11,12 +9,7 @@ import { tap } from "rxjs/operators"
     providedIn: "root"
 })
 
-export class EventosService extends BaseCRUDService {
-  evento: Evento = new Evento();
-  eventos: Evento[] = [];
-
-  public loadingService:LoadingService;
-
+export class EventoService extends BaseCRUDService {
   constructor(
     public httpClient:HttpClient,
   ) {     
@@ -52,7 +45,6 @@ export class EventosService extends BaseCRUDService {
       }))
   }
 
- 
   uploadImagen(photoable_id,file) {
       const formData = new FormData() 
       formData.append("photoable_id", photoable_id)

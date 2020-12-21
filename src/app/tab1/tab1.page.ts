@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core"
-import { ModalController } from "@ionic/angular"
 import { NavigationEnd, Router } from "@angular/router"
 
 import { Article } from "../models/article"
 import { AuthService } from "src/app/Services/authentication/auth.service"
-import { NoticiasService } from "../Services/noticias.service"
-import { ParametrosService } from "../Services/global/parametros.service"
+import { NoticiaService } from "../Services/noticia.service"
+import { ParametroService } from "../Services/global/parametro.service"
 
 import values from "lodash"
 
@@ -24,9 +23,8 @@ export class Tab1Page implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private modalCtrl:ModalController, //para manejar los modales de seleccion 
-    private noticiasService:NoticiasService,
-    private parametrosService:ParametrosService,
+    private noticiaService:NoticiaService,
+    private parametroService:ParametroService,
     private router:Router,
   ) { 
       this.isAdmin = this.authService.isAdmin()
@@ -43,7 +41,9 @@ export class Tab1Page implements OnInit {
       })	
   }	
 
-  ngOnInit():void {}
+  ngOnInit():void {
+      return
+  }
 
   siguientes(event?, pull = false){
       if(pull){
@@ -57,7 +57,7 @@ export class Tab1Page implements OnInit {
           perPage: 5
       }
 
-      this.noticiasService.getAll(params).subscribe((resp:any) =>{
+      this.noticiaService.getAll(params).subscribe((resp:any) =>{
           const data = resp.data.data
           values(data).forEach(element => {
               this.items.push(element)
@@ -73,8 +73,8 @@ export class Tab1Page implements OnInit {
   }
 
   agregarNoticia(){
-      this.parametrosService.param = {noticia: null} //esto está así para que no cargue la última noticia editada.
-      this.router.navigate(["/form-noticias"])
+      this.parametroService.param = {noticia: null} //esto está así para que no cargue la última noticia editada.
+      this.router.navigate(["/form-noticia"])
   }
 
   recargar(event){

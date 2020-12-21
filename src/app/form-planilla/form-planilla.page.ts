@@ -1,40 +1,39 @@
 import { Component, OnInit } from "@angular/core"
-import { ParametrosService } from "../Services/global/parametros.service"
 import { ModalController, NavController } from "@ionic/angular"
+
 import { FormAncestroPage } from "../form-ancestro/form-ancestro.page"
+import { ParametroService } from "../Services/global/parametro.service"
 import { PlanillaAncestros } from "../models/planillaAncestros"
-import { AncestrosPlanillasService } from "../Services/ancestros-planillas.service"
+import { PlanillaService } from "../Services/planilla.service"
 import { ToastService } from "../Services/toast.service"
 
-
 @Component({
-    selector: "app-form-ancestros-planilla",
-    templateUrl: "./form-ancestros-planilla.page.html",
-    styleUrls: ["./form-ancestros-planilla.page.scss"],
+    selector: "app-form-planilla",
+    templateUrl: "./form-planilla.page.html",
+    styleUrls: ["./form-planilla.page.scss"],
 })
-export class FormAncestrosPlanillaPage implements OnInit {
 
+export class FormPlanillaPage implements OnInit {
+
+  public canUpdate = true;
   public isAdmin = false;
   public isDisabled = true;
   public planilla:PlanillaAncestros;
-  public updating = false;
-  public canUpdate = true;
   public titulo = "Nueva Planilla"
+  public updating = false;
 
   constructor(
-    private ancestorsPlanillaService:AncestrosPlanillasService,
-    private parametrosService:ParametrosService,
     private modalCtrl:ModalController,
     private navCtrl:NavController,
+    private planillaService:PlanillaService,
+    private parametroService:ParametroService,
     private toastService:ToastService 
-  ) { }
+  ) {}
 
-  ngOnInit() {
-
+  ngOnInit():void {
       this.planilla = new PlanillaAncestros()
 
-      //Ver si ya paso el segundo sábado del mes y setear canupdate
-
+      return
   }
 
   ionViewDidEnter(){
@@ -43,11 +42,11 @@ export class FormAncestrosPlanillaPage implements OnInit {
 
       this.toastService.mensaje("Atención","Solo es posible modificar las planillas del mes en curso hasta el segundo sábado inclusive.","warning")
 
-      if(this.parametrosService.param){
+      if(this.parametroService.param){
           this.titulo = "Editar Planilla"
           this.updating = true
-          this.canUpdate = this.parametrosService.param.planilla.canEdit
-          this.planilla.asignarValores(this.parametrosService.param.planilla)
+          this.canUpdate = this.parametroService.param.planilla.canEdit
+          this.planilla.asignarValores(this.parametroService.param.planilla)
           console.log(this.planilla)
       }
       else{
@@ -99,14 +98,14 @@ export class FormAncestrosPlanillaPage implements OnInit {
 
       console.log(this.planilla)
       if(this.updating){
-          this.ancestorsPlanillaService.updateOne(this.planilla.id,{},this.planilla).subscribe(data=>{
+          this.planillaService.updateOne(this.planilla.id,{},this.planilla).subscribe(data=>{
               console.log(data)
               this.navCtrl.back()
           })
       }
       else{
           console.log(this.planilla)
-          this.ancestorsPlanillaService.createOne({},this.planilla).subscribe(data=>{
+          this.planillaService.createOne({},this.planilla).subscribe(data=>{
               console.log(data)
               this.navCtrl.back()
           })
@@ -116,7 +115,4 @@ export class FormAncestrosPlanillaPage implements OnInit {
   cancelar(){
       this.navCtrl.back()
   }
-
-
-
 }

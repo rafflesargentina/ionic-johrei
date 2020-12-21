@@ -1,13 +1,13 @@
 import { TestBed } from "@angular/core/testing"
 
-import { AncestorsService } from "./ancestors.service"
+import { NoticiaService } from "./noticia.service"
 
-describe("AncestorsService", () => {
-    let service: AncestorsService
+describe("NoticiaService", () => {
+    let service: NoticiaService
 
     beforeEach(() => {
         TestBed.configureTestingModule({})
-        service = TestBed.inject(AncestorsService)
+        service = TestBed.inject(NoticiaService)
     })
 
     it("should be created", () => {
