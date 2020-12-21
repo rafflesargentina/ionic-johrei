@@ -23,7 +23,7 @@
           <img src="{{item.thumbnail}}" alt="{{item.name}}">
         </ion-avatar>
         <label>{{item.name}}</label>
-        <ion-button fill="clear" (click)="verDetalles(item)">
+        <ion-button *ngIf="item.description" fill="clear" (click)="verDetalles(item)">
           <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
         </ion-button>
         <ion-button fill="clear" href="{{item.url}}">
