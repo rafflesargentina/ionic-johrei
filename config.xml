@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="201210" id="ionic.app.johrei" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="201221" id="ionic.app.johrei" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Johrei Argentina</name>
-    <description>Un plumero para el alma.</description>
+    <description>Un plumero para el alma</description>
     <author email="develop@raffles.com.ar" href="https://raffles.com.ar">Raffles Argentina SRL</author>
     <content src="index.html" />
     <access origin="*" />
@@ -48,11 +48,17 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Request to use Camera</string>
+        </config-file>
+        <config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Request to use Photo Library</string>
+        </config-file>
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
-        <icon height="29" src="resources\ios\icon\icon-small.png" width="29" />
-        <icon height="58" src="resources\ios\icon\icon-small@2x.png" width="58" />
-        <icon height="87" src="resources\ios\icon\icon-small@3x.png" width="87" />
+        <icon height="29" src="resources/ios/icon/icon-small.png" width="29" />
+        <icon height="58" src="resources/ios/icon/icon-small@2x.png" width="58" />
+        <icon height="87" src="resources/ios/icon/icon-small@3x.png" width="87" />
         <icon height="20" src="resources/ios/icon/icon-20.png" width="20" />
         <icon height="40" src="resources/ios/icon/icon-20@2x.png" width="40" />
         <icon height="60" src="resources/ios/icon/icon-20@3x.png" width="60" />
