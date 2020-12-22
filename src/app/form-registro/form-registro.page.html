@@ -35,7 +35,7 @@
           <!--dni-->
           <ion-item [class.invalid]="submitted && !f.document_number.valid">
             <ion-label position="floating">Número de Documento</ion-label>
-            <ion-input name="document_number" type="number" formControlName="document_number" required ></ion-input>
+            <ion-input name="document_number" type="number" formControlName="document_number"></ion-input>
             <div *ngIf="submitted && f.document_number.errors" class="invalid-feedback">
               <div *ngIf="f.document_number.errors.required"><h5>Ingresá tu número de documento</h5></div>
             </div>

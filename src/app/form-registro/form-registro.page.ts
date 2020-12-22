@@ -52,7 +52,7 @@ export class FormRegistroPage {
           contact: this.formBuilder.group({
               mobile: [null, Validators.required],
           }),
-          document_number: ["", Validators.required],
+          document_number: [""],
           email: ["", Validators.required],      
           first_name: ["", Validators.required],
           frequenter:["0"],
