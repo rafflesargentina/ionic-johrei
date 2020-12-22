@@ -10,13 +10,13 @@
       <ion-col offset-md="3" size-md="6">
 	<div class="auth-header">
           <h1 class="auth-title">Johrei Argentina</h1>
-	  <ion-text color="medium">Por favor completá el siguiente formulario para comenzar a utilizar la aplicación.<br>Todos los campos son requeridos.</ion-text>
+	  <ion-text color="medium">Por favor completá el siguiente formulario para comenzar a utilizar la aplicación.<br>Todos los campos marcados con * son requeridos.</ion-text>
 	</div>
 
         <form [formGroup]="datosForm">
           <!--nombre-->
           <ion-item [class.invalid]="submitted && !f.first_name.valid">
-            <ion-label position="floating">Nombre</ion-label>     
+            <ion-label position="floating">Nombre *</ion-label>     
 	    <ion-input name="nombre" type="text" formControlName="first_name" required></ion-input>
             <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
               <div *ngIf="f.first_name.errors.required"><h5>Ingresá tu nombre</h5></div>
@@ -25,7 +25,7 @@
         
           <!--apellido-->
           <ion-item [class.invalid]="submitted && !f.last_name.valid">
-            <ion-label position="floating">Apellido</ion-label>
+            <ion-label position="floating">Apellido *</ion-label>
             <ion-input name="apellido" type="text" formControlName="last_name" required ></ion-input>
             <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
               <div *ngIf="f.last_name.errors.required"><h5>Ingresá tu apellido</h5></div>
@@ -43,7 +43,7 @@
 
           <!--email-->
           <ion-item [class.invalid]="submitted && !f.email.valid">
-            <ion-label position="floating">E-mail</ion-label>
+            <ion-label position="floating">E-mail *</ion-label>
             <ion-input name="email" type="text" formControlName="email" required ></ion-input>
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
               <div *ngIf="f.email.errors.required"><h5>Ingresá tu e-mail</h5></div>
@@ -61,7 +61,7 @@
 
           <!--contraseña-->
           <ion-item [class.invalid]="submitted && !f.password.valid">
-	    <!--<ion-label position="floating">Contraseña</ion-label>-->
+	    <!--<ion-label position="floating">Contraseña *</ion-label>-->
             <ion-input name="password" [type]="passwordTypeInput1" placeholder="Contraseña" #passwordEyeRegister formControlName="password" required clear-on-edit="true"></ion-input> 
             <ion-button fill="clear" (click)="togglePasswordMode()">
               <ion-icon [name]="iconpassword1"></ion-icon>
@@ -73,7 +73,7 @@
 
           <!--repetir contraseña-->
           <ion-item [class.invalid]="submitted && !f.password_confirmation.valid">
-	    <!--<ion-label position="floating">Confirmación de contraseña</ion-label>-->
+	    <!--<ion-label position="floating">Confirmación de contraseña *</ion-label>-->
             <ion-input name="password_confirmation" [type]="passwordTypeInput2" placeholder="Confirmación de contraseña" #passwordEyeConfirmation formControlName="password_confirmation" required clear-on-edit="true"></ion-input>
             <ion-button fill="clear" (click)="togglePasswordConfirmMode()">
               <ion-icon  [name]="iconpassword2"></ion-icon>
