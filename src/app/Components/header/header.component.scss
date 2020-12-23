@@ -17,3 +17,8 @@
   width: 100%;
   height: 20px;
 }
+
+/* Disabling platform specific tweaks */
+.platform-ios.platform-cordova:not(.fullscreen) ion-header {
+  height: 56px !important;
+}
