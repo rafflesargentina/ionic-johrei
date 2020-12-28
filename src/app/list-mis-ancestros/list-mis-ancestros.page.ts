@@ -125,7 +125,7 @@ export class ListMisAncestrosPage implements OnInit {
   } 
 
   eliminar(item){
-      this.ancestroService.deleteOne(item.id,{},item).subscribe(data=>{
+      this.ancestroService.deleteOne(item.id,item).subscribe(data=>{
           this.recargar(undefined)
       })
   }
