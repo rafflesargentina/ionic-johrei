@@ -107,13 +107,13 @@ export class BaseCRUDService{
       }))
   }
 
-  public deleteOne(id, params={}, body={}){    
+  public deleteOne(id, params={}){    
       this.loadingService.presentLoading()
       this.httpParams = new HttpParams()
       Object.keys(params).forEach((key)=> {
           this.httpParams.append(key, params[key])
       }) 
-      return this.httpClient.delete(this.getEndpoint() + "/" + id, body).pipe(tap(() =>{      
+      return this.httpClient.delete(this.getEndpoint() + "/" + id,params).pipe(tap(() =>{      
           this.loadingService.dismissLoading()      
       }, ()=>{
           this.loadingService.dismissLoading()  
