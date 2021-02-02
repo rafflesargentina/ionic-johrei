@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core"
 import { FileChooser } from "@ionic-native/file-chooser/ngx"
+import { Platform } from "@ionic/angular";
 
 @Component({
     selector: "app-seleccionar-archivo",
@@ -14,7 +15,8 @@ export class SeleccionarArchivoComponent implements OnInit {
   public archivo:any;
 
   constructor(
-    private fileChooser: FileChooser
+    private fileChooser: FileChooser,
+    private platform:Platform
   ) { }
 
   ngOnInit() {}
@@ -32,6 +34,10 @@ export class SeleccionarArchivoComponent implements OnInit {
   }
 
   get IsMobile() {
+    if (this.platform.is("desktop")) {
+      return false
+  } else {
       return true
-  }
+  } 
+}
 }
