@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  url:'https://testing.api.johrei.com.ar/v1/',
+  url:'https://api.johrei.com.ar/v1/',
   production: false,
   firebase: {
     vapidKey: 'BHUdiY42pvD9H_f7RwPS0sKVJ72fQtkp05Yg1T6Nj8uq0bH2tJKblUxfUVizAGmQ7qx_jqWrAFL_NS6h86P41q8'

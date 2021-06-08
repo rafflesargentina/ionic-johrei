@@ -96,10 +96,13 @@ export class ListMisAncestrosPage implements OnInit {
               console.log(retorno)
               if(retorno.data){     
                   this.ancestroService.updateOne(retorno.data.id,{},retorno.data).subscribe(data=>{
-                      this.recargar(undefined)
+                    this.recargar(undefined)
                   })
-        
-              }        
+                  
+              }    
+              else{
+                this.recargar(undefined)
+              }    
           })
       return await modal.present()
   }

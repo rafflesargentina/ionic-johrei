@@ -10,26 +10,26 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>Nombre</ion-col>
-      <ion-col>Relación</ion-col>
-      <ion-col *ngIf="canUpdate">[...]</ion-col>
-    </ion-row>
+  <ion-item  *ngFor="let ancestro of items;let i = index" >
+    <div slot="start">
+      <ion-icon name="person-outline"></ion-icon>
+    </div>      
+    <ion-label style="color:black">                
+      <h2><b>{{ancestro.name}}</b></h2>
+      <p>
+        {{ancestro.relationship}}
+  
+        
+       
+      </p>
 
-    <ion-row class="ion-align-items-center" *ngFor="let ancestro of items;let i = index">
-      <ion-col>{{ancestro.name}}</ion-col>
-      <ion-col>{{ancestro.relationship}}</ion-col>
-      <ion-col *ngIf="canUpdate">
-        <ion-button fill="clear" (click)="editar(i,ancestro)">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-        </ion-button>
-        <!--ion-button fill="clear" (click)="eliminar(ancestro)">
-          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </ion-button-->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    </ion-label>  
+    <ion-button slot="end" fill="clear" (click)="editar(i,ancestro)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  
 
   <!--Botón flotante para agregar ancestros -->
   <ion-fab *ngIf="canUpdate" vertical="bottom" horizontal="end" slot="fixed">

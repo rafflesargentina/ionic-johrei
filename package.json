@@ -100,7 +100,8 @@
       },
       "cordova-plugin-camera": {
         "CAMERA_USAGE_DESCRIPTION": "Request to use Camera",
-        "PHOTOLIBRARY_USAGE_DESCRIPTION": "Request to use Photo Library"
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "Request to use Photo Library",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-crop": {},
       "cordova-plugin-file": {},

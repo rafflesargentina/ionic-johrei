@@ -24,6 +24,7 @@
         </div>
       </div>
     </ion-item>
+    <ion-button  *ngIf="updating" class="btn-borrar" size="large" color="danger" (click)="borrar()"><ion-icon name="trash"></ion-icon> Borrar</ion-button>
   </form>  
   <ion-toolbar class="ion-padding"> 
     <ion-button slot="start"  color="light" (click)="cancelar()">

@@ -1,4 +1,5 @@
 export class Ancestro{
+    public id="";
     public name ="";
     public relationship="";
     
