@@ -10,6 +10,7 @@ import { HeaderComponent } from "./header/header.component"
 import { SeleccionarArchivoComponent } from "./seleccionar-archivo/seleccionar-archivo.component"
 
 import localeEs from "@angular/common/locales/es"
+import { AudioPlayerComponent } from "./audio-player/audio-player.component"
 
 registerLocaleData(localeEs)
 
@@ -22,12 +23,14 @@ registerLocaleData(localeEs)
         ReactiveFormsModule,
     ],
     declarations: [
+        AudioPlayerComponent,
         CardEventoComponent,
         CardNoticiaComponent,
         HeaderComponent,
         SeleccionarArchivoComponent,
     ],
     exports: [
+        AudioPlayerComponent,
         CardEventoComponent,
         CardNoticiaComponent,
         HeaderComponent,

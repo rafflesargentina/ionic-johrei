@@ -1,5 +1,5 @@
 {
-  "name": "Johrei Argentina",
+  "name": "JohreiArgentina",
   "version": "1.1.2",
   "author": "Raffles Argentina SRL",
   "homepage": "https://raffles.com.ar",
@@ -44,6 +44,7 @@
     "cordova-plugin-googleplus": "^8.5.0",
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "firebase": "^7.15.1",
+    "howler": "^2.2.1",
     "lodash": "^4.17.20",
     "ngx-file-drop": "^9.0.1",
     "ngx-image-cropper": "^3.1.9",

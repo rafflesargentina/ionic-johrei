@@ -1,3 +1,19 @@
-<p>
-  audio-player works!
-</p>
+<ion-row>
+  <ion-col size="12" class="ion-text-center">
+
+  </ion-col>
+  <ion-col size="12">
+    <ion-range #range [(ngModel)]="progress" max="100" color="success" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+  </ion-col> 
+  <ion-col size="12" class="ion-text-center">
+      <ion-button fill="clear" *ngIf="loading" (click)="tooglePlayer(true)" color="success">
+        <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!isPlaying && !loading" color="success">
+        <ion-icon slot="icon-only" name="play"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="isPlaying && !loading" color="success">
+        <ion-icon slot="icon-only" name="stop"></ion-icon>
+      </ion-button>
+  </ion-col>
+</ion-row>
