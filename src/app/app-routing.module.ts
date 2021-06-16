@@ -89,17 +89,13 @@ const routes: Routes = [
         loadChildren: () => import("./form-ancestro/form-ancestro.module").then( m => m.FormAncestroPageModule)
     },
     {
-        path: "form-planilla",
-        loadChildren: () => import("./form-planilla/form-planilla.module").then( m => m.FormPlanillaPageModule)
-    },
-    {
         path: "list-mis-ancestros",
         loadChildren: () => import("./list-mis-ancestros/list-mis-ancestros.module").then( m => m.ListMisAncestrosPageModule)
     }
 ]
 
 @NgModule({
-    imports: [
+    imports: [ 
         RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
     ],
     exports: [RouterModule]

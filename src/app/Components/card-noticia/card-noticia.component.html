@@ -26,7 +26,7 @@
       <ion-card-subtitle>Audios adjuntos</ion-card-subtitle>
       <ion-list>
         <ion-item lines="none" *ngFor="let audio of noticia.audios">
-          <audio style="width: 100%;" controls=true src="{{audio.url}}"></audio>
+          <audio style="width: 100%;" controls=true type="audio/mpeg" src="{{audio.url}}"></audio>
         </ion-item>
       </ion-list>
     </div>

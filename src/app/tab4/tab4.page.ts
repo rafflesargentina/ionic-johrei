@@ -78,19 +78,11 @@ export class Tab4Page implements OnInit {
       })
   }
 
-  async editar(item){
-      this.parametroService.param = {planilla : item}  
-      this.router.navigate(["/form-planilla"])
-  }
-
+  
   recargar(event){
       this.siguientes(event, true)
       this.isDisabled = true
       this.items = []
   }
 
-  agregar(){
-      this.parametroService.param = undefined  
-      this.router.navigate(["/form-planilla"])
-  }
 }
