@@ -36,6 +36,10 @@ export class AudioPlayerComponent implements OnInit {
       console.log(err)
     });
 
+  }
+
+  ionViewDidEnter(){
+    
 
   }
 
