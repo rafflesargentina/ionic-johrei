@@ -34,7 +34,7 @@ import { TabsPageModule } from "./tabs/tabs.module"
 import { FileTransfer} from "@ionic-native/file-transfer/ngx"
 import { FileChooser } from "@ionic-native/file-chooser/ngx"
 import { AuthInterceptorService } from "./Services/auth-interceptor-service.service"
-
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAYAbLJnwJPwltC6tC1NaPjryYuIKTB1zM",
@@ -77,6 +77,7 @@ const firebaseConfig = {
         StatusBar,
         SplashScreen,
         GooglePlus,
+        Media,
         Crop,
         Camera,
         ImagePicker,
