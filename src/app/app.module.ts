@@ -35,7 +35,7 @@ import { FileTransfer} from "@ionic-native/file-transfer/ngx"
 import { FileChooser } from "@ionic-native/file-chooser/ngx"
 import { AuthInterceptorService } from "./Services/auth-interceptor-service.service"
 import { Media, MediaObject } from '@ionic-native/media/ngx';
-
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 const firebaseConfig = {
     apiKey: "AIzaSyAYAbLJnwJPwltC6tC1NaPjryYuIKTB1zM",
     authDomain: "gestionsocialup.firebaseapp.com",
@@ -78,6 +78,7 @@ const firebaseConfig = {
         SplashScreen,
         GooglePlus,
         Media,
+        NativeAudio,
         Crop,
         Camera,
         ImagePicker,

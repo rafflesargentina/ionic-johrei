@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonRange } from '@ionic/angular';
 import {Howl} from 'howler'
-import { Media, MediaObject } from '@ionic-native/media/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 export interface Track{
   name:string;
@@ -16,7 +16,6 @@ export interface Track{
 export class AudioPlayerComponent implements OnInit {
 
   @Input() track:Track = null;
-  file: MediaObject
   player: Howl = null;
   isPlaying = false;
   loading = false;
@@ -24,43 +23,18 @@ export class AudioPlayerComponent implements OnInit {
 
   @ViewChild('range',{static:false}) range:IonRange;
   constructor(
-    private media: Media
+    private nativeAudio: NativeAudio
   ) { 
     
   }
 
   ngOnInit() {
-   /* console.log(this.track.url)
-    this.player = new Howl({
-      src:[this.track.url],
-      html5:true,
-      onplay:()=>{
-        this.loading = false;
-        this.isPlaying = true;
-        this.updateProgress()
-      },
-      onend:()=>{
-        console.log('onend')
-      }
-    })*/
-    this.file = this.media.create(this.track.url);
 
-    console.log(this.track.url)
-
-    this.file.onStatusUpdate.subscribe(status => console.log(status)); // fires when file status changes
-
-
-    this.file.onSuccess.subscribe(() => console.log('Action is successful'));
-
-  this.file.onError.subscribe(error => console.log('Error!', error));
-
-  let duration = this.file.getDuration();
-  
-  this.file.getCurrentPosition().then((position) => {
-    console.log(position);
-    
-    this.progress = (position / duration) *100 || 0;
-  });
+    this.nativeAudio.preloadSimple('uniqueId1', this.track.url).then(()=>{
+      console.log("OK")
+    }, (err)=>{
+      console.log(err)
+    });
 
 
   }
@@ -70,12 +44,20 @@ export class AudioPlayerComponent implements OnInit {
     this.isPlaying = !pause;
     if(pause){
       this.loading = false;
-      this.file.play();
+      this.nativeAudio.play('uniqueId1').then(()=>{
+        console.log("playing")
+      },err=>{
+        console.log("error")
+      });
     }
     else{
       this.loading = true;
       //this.player.play();
-      this.file.stop();
+      this.nativeAudio.stop('uniqueId1').then(()=>{
+        console.log("playing")
+      },err=>{
+        console.log("error")
+      });
     }
   }
 
@@ -87,22 +69,6 @@ export class AudioPlayerComponent implements OnInit {
 
   }
 
-  seek(){
-    console.log("!!!!")
-    let newValue = +this.range.value;
-    let duration = this.file.getDuration();
-  //  this.player.seek(duration * (newValue/100));
-
-    this.file.seekTo(duration * (newValue/100));
-
-  }
-
- /* updateProgress(){
-    let seek = this.player.seek();
-    this.progress = (seek / this.player.duration()) *100 || 0;
-    setTimeout(()=>{
-      this.updateProgress();
-    },1000)
-  }*/
+  
 
 }
