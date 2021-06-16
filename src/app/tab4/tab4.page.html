@@ -19,10 +19,7 @@
     <ion-list *ngFor="let chunk of items" class="ion-margin-bottom">
       <ion-list-header><h3>{{chunk[0].user.name}}</h3></ion-list-header>
       <ion-item  *ngFor="let planilla of chunk" >
-        <ion-label style="text-transform:capitalize;">{{planilla.date | date: "MMMM 'de' yyyy"}}</ion-label> 
-        <ion-button fill="clear" (click)="editar(planilla)">
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-        </ion-button>   
+        <ion-label style="text-transform:capitalize;">{{planilla.date | date: "MMMM 'de' yyyy"}}</ion-label>  
       </ion-item>      
     </ion-list>
   </ion-grid>
