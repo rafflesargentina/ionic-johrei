@@ -85,7 +85,7 @@ export class AudioPlayerComponent implements OnInit {
   }
 
   mediaPlay(){
-    const file: MediaObject = this.media.create('file.mp3');
+    const file: MediaObject = this.media.create(this.track.url);
     file.play();
   }
 
