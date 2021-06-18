@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonRange } from '@ionic/angular';
 import {Howl} from 'howler'
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 export interface Track{
   name:string;
@@ -23,8 +24,11 @@ export class AudioPlayerComponent implements OnInit {
 
   @ViewChild('range',{static:false}) range:IonRange;
   constructor(
-    private nativeAudio: NativeAudio
+    private nativeAudio: NativeAudio,
+    private media: Media
   ) { 
+
+    
     
   }
 
@@ -71,6 +75,18 @@ export class AudioPlayerComponent implements OnInit {
 
   prev(){
 
+  }
+
+  howlPlay(){
+
+    const sound = new Howl({ src: this.track.url, usingWebAudio: false, html5: true, mute: false, loop: true, webAudio: false, volume: 1, })
+
+    sound.play();
+  }
+
+  mediaPlay(){
+    const file: MediaObject = this.media.create('file.mp3');
+    file.play();
   }
 
   
