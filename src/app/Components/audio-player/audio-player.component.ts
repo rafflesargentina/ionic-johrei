@@ -79,7 +79,7 @@ export class AudioPlayerComponent implements OnInit {
 
   howlPlay(){
 
-    const sound = new Howl({ src: this.track.url, usingWebAudio: false, html5: true, mute: false, loop: true, webAudio: false, volume: 1, })
+    const sound = new Howl({ src: this.track.url, usingWebAudio: false, html5: false, mute: false, loop: true, webAudio: false, volume: 1, })
 
     sound.play();
   }

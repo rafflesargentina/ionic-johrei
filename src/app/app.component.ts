@@ -5,7 +5,8 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx"
 import { StatusBar } from "@ionic-native/status-bar/ngx"
 
 import { AuthService } from "./Services/authentication/auth.service"
-
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+import { UsuarioService } from "./Services/usuario.service"
 
 @Component({
     selector: "app-root",
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService:AuthService,
     private router: Router,
+    private fcm: FCM
     ) {
         this.initializeApp()    
     }
@@ -40,14 +42,41 @@ export class AppComponent implements OnInit {
         this.platform.ready().then(() => {     
             this.statusBar.styleDefault()
             this.splashScreen.hide()
+
+            if (this.authService.isAuthenticated()) {
+                this.router.navigate(["/tabs/tab1"])
+    
+                this.fcm.requestPushPermission()
+                this.fcm.getInitialPushPayload()
+        
+                this.fcm.onTokenRefresh().subscribe(token => {
+                    this.authService.updateFCMToken(token).subscribe()
+                },error=>{
+                    console.log(error)
+                })
+    
+                // Subscribing to new notifications.
+                this.fcm.onNotification().subscribe(data => {
+                    if(data.wasTapped){
+                        alert(data.body)
+                    } else {
+                        console.log(data)
+                        alert(data.body)
+                    }
+                })
+    
+                this.fcm.getToken().then(token => {
+                    this.authService.updateFCMToken(token).subscribe()
+                },error=>{
+                    console.log(error)
+                })
+            } else{
+                this.router.navigate(["/login"])
+            } 
         })
 
 
-        if (this.authService.isAuthenticated()) {
-            this.router.navigate(["/tabs/tab1"])
-        } else{
-            this.router.navigate(["/login"])
-        } 
+        
     }
 
     ngOnInit():void {}

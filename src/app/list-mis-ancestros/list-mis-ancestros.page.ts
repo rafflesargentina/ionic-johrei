@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, ViewChild } from "@angular/core"
 import { NavigationEnd, Router } from "@angular/router"
-import { ModalController } from "@ionic/angular"
+import { IonReorderGroup, ModalController } from "@ionic/angular"
 
 import { AuthService } from "../Services/authentication/auth.service"
 import { AncestroService } from "../Services/ancestro.service"
 import { FormAncestroPage } from "../form-ancestro/form-ancestro.page"
-
+import { ItemReorderEventDetail } from '@ionic/core';
 import values from "lodash"
 
 @Component({
@@ -23,6 +23,9 @@ export class ListMisAncestrosPage implements OnInit {
   public updating = false;
 
   private paginaActual = 0;
+
+  @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
+
 
   constructor(
     private ancestroService:AncestroService,
@@ -70,10 +73,12 @@ export class ListMisAncestrosPage implements OnInit {
 
       this.ancestroService.getAll(params).subscribe((resp:any) =>{
           const data = resp.data.data
-          values(data).forEach(element => {
+          this.items = [];
+          values(data).forEach((element,index) => {
+              element.order = index;
               this.items.push(element)
           })
-    
+          console.log(this.items)
           if(event){
               event.target.complete()
               if(resp.length === 0){
@@ -131,5 +136,31 @@ export class ListMisAncestrosPage implements OnInit {
       this.ancestroService.deleteOne(item.id,item).subscribe(data=>{
           this.recargar(undefined)
       })
+  }
+
+  doReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+    this.items.splice(ev.detail.to, 0, this.items.splice(ev.detail.from, 1)[0]);
+    console.log(this.items)
+    let ordenes =[];
+
+    for(let i = 0; i< this.items.length; i++){              
+        ordenes.push({
+            id:this.items[i].id,
+            order:i
+        })
+    }
+   
+
+    this.ancestroService.updateOrder(ordenes).subscribe(data=>{
+        console.log(data)
+    })
+
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    ev.detail.complete();
   }
 }

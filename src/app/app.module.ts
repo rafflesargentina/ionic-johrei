@@ -24,7 +24,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 //import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from "../environments/environment"
 
-import { FCM } from "@ionic-native/fcm/ngx"
 import { ImageCropperModule } from "ngx-image-cropper"
 import { RecortarImagenPage } from "./recortar-imagen/recortar-imagen.page"
 import { ServiceWorkerModule } from "@angular/service-worker"
@@ -36,6 +35,9 @@ import { FileChooser } from "@ionic-native/file-chooser/ngx"
 import { AuthInterceptorService } from "./Services/auth-interceptor-service.service"
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
+import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx"
+
 const firebaseConfig = {
     apiKey: "AIzaSyAYAbLJnwJPwltC6tC1NaPjryYuIKTB1zM",
     authDomain: "gestionsocialup.firebaseapp.com",
@@ -78,11 +80,11 @@ const firebaseConfig = {
         SplashScreen,
         GooglePlus,
         Media,
+        FCM,
         NativeAudio,
         Crop,
         Camera,
         ImagePicker,
-        FCM,
         AngularFirestore,
         FileChooser,
         FileTransfer,
