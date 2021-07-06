@@ -18,6 +18,7 @@ export class AuthService  {
 
   private routeSubscription:any = undefined;
   private url = "";
+  public hasUnreadNotificationsSubject = new BehaviorSubject(false);
 
   constructor(
     private router:Router,
@@ -43,15 +44,21 @@ export class AuthService  {
       })    
   }
 
-  protected authenticate():boolean {
-      this.token = this.getStoredToken()
-      this.user = this.getStoredUser()
+  public hasUnreadNotificationsObserver() {
+    return this.hasUnreadNotificationsSubject.asObservable()
+}
 
-      if (this.token && this.user) {
-          this.authenticationState.next(true)
-      } else {
-          this.authenticationState.next(false)
-      }
+  protected authenticate():boolean {
+    this.token = this.getStoredToken()
+    this.user = this.getStoredUser()
+
+    if (this.token && this.user) {
+        this.authenticationState.next(true)
+        this.hasUnreadNotificationsSubject.next(this.user.unread_notifications_count > 0)
+    } else {
+        this.authenticationState.next(false)
+        this.hasUnreadNotificationsSubject.next(false)
+    }
 
       return this.authenticationState.value
   }
@@ -164,15 +171,11 @@ export class AuthService  {
 
   public requestPasswordReset(data:unknown):Observable<any> {
       this.loadingService.presentLoading()
-
       return this.httpClient.post(this.url+"password/email", data).pipe(tap((response:any) =>{
           this.loadingService.dismissLoading()
-
           const resp:any = response
           console.log(resp)
-
           this.router.navigate(["login"])
-
       },()=>{
           this.loadingService.dismissLoading()
       }))
@@ -194,7 +197,7 @@ export class AuthService  {
 
   public updateFCMToken(token:string):Observable<any> {
       const data = {
-          token: token
+          fcm_token: token
       }
 
       return this.httpClient.put(this.url+"account/fcm-token", data).pipe(tap((response:any) => {
