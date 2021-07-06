@@ -11,6 +11,7 @@ import { SeleccionarArchivoComponent } from "./seleccionar-archivo/seleccionar-a
 
 import localeEs from "@angular/common/locales/es"
 import { AudioPlayerComponent } from "./audio-player/audio-player.component"
+import { CardNotificacionComponent } from "./card-notificacion/card-notificacion.component"
 
 registerLocaleData(localeEs)
 
@@ -28,6 +29,7 @@ registerLocaleData(localeEs)
         CardNoticiaComponent,
         HeaderComponent,
         SeleccionarArchivoComponent,
+        CardNotificacionComponent
     ],
     exports: [
         AudioPlayerComponent,
@@ -35,6 +37,7 @@ registerLocaleData(localeEs)
         CardNoticiaComponent,
         HeaderComponent,
         SeleccionarArchivoComponent,
+        CardNotificacionComponent
     ],
     providers: [
         {provide: LOCALE_ID, useValue: "es"}

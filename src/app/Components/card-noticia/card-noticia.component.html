@@ -24,21 +24,7 @@
 
     <div class="ion-margin-bottom" *ngIf="noticia.audios.length > 0">
       <ion-card-subtitle>Audios adjuntos</ion-card-subtitle>
-      <ion-list>
-       
-        <ion-item lines="none" *ngFor="let audio of noticia.audios">
-          prueba con html opciones controls=true type="audio/mpeg"
-          <audio style="width: 100%;" controls=true type="audio/mpeg" src="{{audio.url}}"></audio>
-        </ion-item>
-
-        <ion-item lines="none" *ngFor="let audio of noticia.audios">
-          prueba con html opciones controls
-            <audio controls>
-              <source src="{{audio.url}}">
-          </audio>
-        </ion-item>
-
-      </ion-list>
+      
       <app-audio-player *ngFor="let audio of noticia.audios"
         [track]="audio"
       ></app-audio-player>

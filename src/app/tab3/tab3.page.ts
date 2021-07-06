@@ -8,6 +8,7 @@ import { ParametroService } from "../Services/global/parametro.service"
 
 import values from "lodash"
 import { DetailEsencialPage } from "../detail-esencial/detail-esencial.page"
+import { PlanillaService } from "../Services/planilla.service"
 
 @Component({
     selector: "app-tab3",
@@ -16,76 +17,79 @@ import { DetailEsencialPage } from "../detail-esencial/detail-esencial.page"
 })
 
 export class Tab3Page implements OnInit {
-  public isAdmin = false;
-  public isDisabled = true;
-  public items = [];
+    public isAdmin = false;
+    public isDisabled = true;
+    public items = [];
+  
+    private paginaActual = 0;
+    private listing="mine";
+  
+    constructor(
+      private authService:AuthService,
+      private parametroService:ParametroService,
+      private planillaService:PlanillaService,
+      private router:Router,
+    ) { 
+        this.isAdmin = this.authService.isAdmin()
+        if(this.isAdmin){
+            this.listing = "all"
+        }
+        else{
+            this.listing = "mine"
+        } 
+        // Subscribe to router events.
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                if (event.url.includes("tabs/tab3")) {
+                    this.items = []
+                    this.siguientes()
+                }    
+            }
+        })	
+    }	
+  
+    ngOnInit():void {
+        return
+    }
+  
+    siguientes(event?, pull = false){
+        if(pull){
+            this.paginaActual = 0
+        }
+        
+        this.paginaActual++
+  
+        const params={
+            page:this.paginaActual,
+            perPage: 5,
+            listing:this.listing
+        }
+  
+        this.planillaService.getAll(params).subscribe((resp:any) =>{
+            const data = resp.data.data
+            console.log(data)
+            values(data).forEach(element => {              
+                this.items.push(element)
+            })
+        
+            if(event){
+                event.target.complete()
+                if(resp.length === 0){
+                    this.isDisabled = false
+                }
+            }
+        })
+    }
+  
+    
+    recargar(event){
+        this.siguientes(event, true)
+        this.isDisabled = true
+        this.items = []
+    }
 
-  private paginaActual = 0;
-
-  constructor(
-    private authService:AuthService,
-    private documentoService:DocumentoService,
-    private modalCtrl:ModalController, //para manejar los modales de seleccion 
-    private parametroService:ParametroService,
-    private router:Router
-  ) { 
-      this.isAdmin = this.authService.isAdmin()
-
-      // Subscribe to router events.
-      this.router.events.subscribe(event => {
-          if (event instanceof NavigationEnd) {
-              if (event.url.includes("tabs/tab3")) {
-                  this.items = []
-                  this.siguientes()
-              }    
-          }
-      })	
-  }	
-
-  ngOnInit():void {
-      return
-  }
-
-  siguientes(event?, pull = false){
-      if(pull){
-          this.paginaActual = 0
-      }
-      
-      this.paginaActual++
-
-      const params={
-          page:this.paginaActual,
-          perPage: 5
-      }
-
-      this.documentoService.getAll(params).subscribe((resp:any) =>{
-          const data = resp.data.data
-          values(data).forEach(element => {
-              this.items.push(element)
-          })
-      
-          if(event){
-              event.target.complete()
-              if(resp.length === 0){
-                  this.isDisabled = false
-              }
-          }
-      })
-  }
-
-  async verDetalles(item){
-      const modal = await this.modalCtrl.create({
-          component: DetailEsencialPage,
-          componentProps: {
-              "esencial": item, 
-          }
-      })
-      return await modal.present()
-  }
-
-  recargar(event){
-      this.siguientes(event, true)
-      this.isDisabled = true
-      this.items = []
-  }
+    async ver(item){
+        this.parametroService.param = {planilla : item}  
+        this.router.navigate(["/form-planilla"])
+    }
 }

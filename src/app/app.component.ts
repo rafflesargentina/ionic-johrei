@@ -101,6 +101,10 @@ export class AppComponent implements OnInit {
         this.router.navigate(["list-mis-ancestros"])  
     }
 
+    verPreguntas(){
+        this.router.navigate(["list-faq"])  
+    }
+
     login() {
         this.router.navigate(["login"])
     }

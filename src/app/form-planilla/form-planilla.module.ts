@@ -4,20 +4,19 @@ import { FormsModule } from "@angular/forms"
 
 import { IonicModule } from "@ionic/angular"
 
-import { Tab4PageRoutingModule } from "./tab4-routing.module"
+import { FormPlanillaPageRoutingModule } from "./form-planilla-routing.module"
 
-import { Tab4Page } from "./tab4.page"
+import { FormPlanillaPage } from "./form-planilla.page"
 import { ComponentsModule } from "../Components/components.module"
 
 @NgModule({
-    entryComponents: [], //para manejar los medales de selección
     imports: [
         CommonModule,
         ComponentsModule,
         FormsModule,
         IonicModule,
-        Tab4PageRoutingModule
+        FormPlanillaPageRoutingModule
     ],
-    declarations: [Tab4Page],
+    declarations: [FormPlanillaPage]
 })
-export class Tab4PageModule {}
+export class FormPlanillaPageModule {}

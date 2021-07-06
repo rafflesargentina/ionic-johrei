@@ -1,0 +1,26 @@
+<ion-item *ngIf="item.data" class="notificacion-list_item">
+  <div class="card notification-card">
+    <div class="card-body notification-card_body">
+      <div class="pl-3">
+        <h3 class="card-title notification-card_title text-color-primary">{{item.data.title}}</h3>
+        <div class="card-text notification-card_text">       
+          {{item.data.body}}          
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="item.data.actions" class="card-footer notification-card_footer d-flex justify-content-between">
+      <div *ngIf="item.data.actions[0]" (click)="ver(item.data.actions[0])">
+        <a class="text-color-primary">{{item.data.actions[0].text}}</a>
+      </div>
+  
+      <div *ngIf="item.data.actions[1]" (click)="ver(item.data.actions[1])">
+        <a class="text-color-primary">{{item.data.actions[1].text}}</a>
+      </div>
+
+      <div *ngIf="item.data.actions[2]" (click)="ver(item.data.actions[2])">
+        <a class="text-color-primary">{{item.data.actions[2].text}}</a>
+      </div>
+    </div>
+  </div>
+</ion-item>

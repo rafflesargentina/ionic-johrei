@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <app-header [titulo]="'Esenciales'" [icono]="'menu'"></app-header>
+    <app-header [titulo]="'Planillas'" [icono]="'menu'"></app-header>
   </ion-toolbar>
 </ion-header>
 
@@ -10,31 +10,23 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--Esenciales-->
-  <ion-grid fixed>
-    <div *ngIf="items.length === 0" class="content-placeholder">
-      <p>No hay novedades para mostrar.</p>
-    </div>
+  <div *ngIf="items.length === 0" class="content-placeholder">
+    <p>No hay planillas para mostrar.</p>
+  </div>
 
-    <ion-list *ngFor="let chunk of items" class="ion-margin-bottom">
-      <ion-list-header>{{ chunk[0].documentable_type }}</ion-list-header>
-      <ion-item *ngFor="let item of chunk">
-        <ion-avatar slot="start">
-          <img src="{{item.thumbnail}}" alt="{{item.name}}">
-        </ion-avatar>
-        <label>{{item.name}}</label>
-        <ion-button *ngIf="item.description" fill="clear" (click)="verDetalles(item)">
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" href="{{item.url}}">
-          <ion-icon slot="icon-only" name="download-outline"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-list>
-  </ion-grid>
-
+  <ion-list *ngFor="let chunk of items" class="ion-margin-bottom">
+    <ion-list-header><h3>{{chunk[0].user.name}}</h3></ion-list-header>
+    <ion-item  *ngFor="let planilla of chunk" >
+      <ion-label style="text-transform:capitalize;">{{planilla.date | date: "MMMM 'de' yyyy"}}</ion-label> 
+      <ion-button fill="clear" (click)="ver(planilla)">
+        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+      </ion-button>
+    </ion-item>      
+  </ion-list>
+  
   <!--Infinite-Scroll-->
   <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)" [disabled]="isDisabled">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+

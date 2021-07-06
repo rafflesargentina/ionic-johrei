@@ -1,32 +1,31 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <app-header [titulo]="'Planillas'" [icono]="'menu'"></app-header>
-  </ion-toolbar>
+<ion-header>
+  <app-header [titulo]="'Notificaciones'" [icono]="'menu'"></app-header>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!--Refresher-->
-  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+<ion-content class="notifications notifications-content">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--Planillas-->
-  <ion-grid fixed>
-    <div *ngIf="items.length === 0" class="content-placeholder">
-      <p>No hay planillas para mostrar.</p>
-    </div>
+  <div>
+    <ion-list *ngIf="notificaciones.length > 0" class="notifications-list">
+      <ion-item-sliding *ngFor="let notificacion of notificaciones" class="notifications-list_item">
+        <app-card-notificacion [item]="notificacion"></app-card-notificacion>
+        <ion-item-options side="end" (click)="eliminar(notificacion)">
+          <ion-item-option color="danger"><ion-icon class="pr-1" name="trash-outline"></ion-icon>Eliminar</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list> 
+  </div>
 
-    <ion-list *ngFor="let chunk of items" class="ion-margin-bottom">
-      <ion-list-header><h3>{{chunk[0].user.name}}</h3></ion-list-header>
-      <ion-item  *ngFor="let planilla of chunk" >
-        <ion-label style="text-transform:capitalize;">{{planilla.date | date: "MMMM 'de' yyyy"}}</ion-label>  
-      </ion-item>      
-    </ion-list>
-  </ion-grid>
+  <div *ngIf="notificaciones.length === 0" class="content-placeholder">
+    <p class="text-center w-100">No hay notificaciones para mostrar.</p>
+  </div>
 
-
-  <!--Infinite-Scroll-->
-  <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)" [disabled]="isDisabled">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="verMas()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

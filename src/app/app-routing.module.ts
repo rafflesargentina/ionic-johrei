@@ -61,6 +61,11 @@ const routes: Routes = [
         canActivate: [RedirectIfNotAuthenticatedService]
     },
     {
+        path: "form-planilla",
+        loadChildren: () => import("./form-planilla/form-planilla.module").then( m => m.FormPlanillaPageModule),
+        canActivate: [RedirectIfNotAuthenticatedService]
+    },
+    {
         path: "tabs",
         loadChildren: () => import("./tabs/tabs.module").then( m => m.TabsPageModule),
         canActivate: [RedirectIfNotAuthenticatedService]
@@ -91,7 +96,11 @@ const routes: Routes = [
     {
         path: "list-mis-ancestros",
         loadChildren: () => import("./list-mis-ancestros/list-mis-ancestros.module").then( m => m.ListMisAncestrosPageModule)
-    }
+    },  {
+    path: 'list-faq',
+    loadChildren: () => import('./list-faq/list-faq.module').then( m => m.ListFAQPageModule)
+  }
+
 ]
 
 @NgModule({

@@ -1,6 +1,6 @@
-<ion-header class="ion-no-border" >
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <app-header [titulo]="'Eventos'" [icono]="'menu'"></app-header>
+    <app-header [titulo]="'Esenciales'" [icono]="'menu'"></app-header>
   </ion-toolbar>
 </ion-header>
 
@@ -10,28 +10,45 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--Eventos-->
+  <!--Esenciales-->
   <ion-grid fixed>
     <div *ngIf="items.length === 0" class="content-placeholder">
-      <p>No hay eventos para mostrar.</p>
+      <p>No hay novedades para mostrar.</p>
     </div>
 
-    <div *ngFor="let chunk of items">
-      <h2>{{ chunk[0].date | date: "dd 'de' MMMM" }}</h2>
-      <ion-row>
-        <ion-col *ngFor="let item of chunk" size="12" size-lg="4" size-md="3">
-          <app-card-evento [data]="item"></app-card-evento>
-        </ion-col>
-      </ion-row>
-    </div>
+    <span *ngFor="let chunk of items;let i = index">
+      <ion-item (click)="toggle(i)">        
+        <label>
+          <p>{{ chunk[0].documentable_type }}</p>          
+        </label>  
+        <ion-button slot="end" *ngIf="!isMenuOpen[i]">
+          <ion-icon name="chevron-up-outline"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" *ngIf="isMenuOpen[i]">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-button>      
+      </ion-item>
+      <ion-list [ngClass]="isMenuOpen[i] ? 'active' : 'inactive'">
+        <ion-item  *ngFor="let item of chunk" >
+          <ion-avatar slot="start">
+            <img src="{{item.thumbnail}}" alt="{{item.name}}">
+          </ion-avatar>
+          <label>
+            <p>{{item.name}}</p>
+            <ion-button *ngIf="item.description" fill="clear" (click)="verDetalles(item)">
+              <ion-icon slot="icon-only" name="eye-outline"></ion-icon>vista rápida
+            </ion-button>
+            <ion-button fill="clear" href="{{item.url}}">
+              <ion-icon slot="icon-only" name="download-outline"></ion-icon> descargar
+            </ion-button>
+          </label>        
+        </ion-item>
+      
+      
+    </ion-list>
+    </span>
+    
   </ion-grid>
-
-  <!--Botón flotante para agregar eventos si se es administrador -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isAdmin">
-    <ion-fab-button (click)="agregarEvento()" >
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
   <!--Infinite-Scroll-->
   <ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)" [disabled]="isDisabled">

@@ -26,11 +26,7 @@
 	    <ion-item (click)="cargarNoticia()" *ngIf="isAdmin" routerDirection="root" lines="none" detail="false">
               <ion-icon slot="start" name="document-text-outline"></ion-icon>
               <ion-label>Cargar Noticias</ion-label>
-            </ion-item>   
-            <ion-item (click)="cargarEventos()" *ngIf="isAdmin" routerDirection="root" lines="none" detail="false">
-              <ion-icon slot="start" name="calendar"></ion-icon>
-              <ion-label>Cargar Eventos</ion-label>
-            </ion-item> 
+            </ion-item>  
             <ion-item (click)="verMisAncestros()" routerDirection="root" lines="none" detail="false">
               <ion-icon slot="start" name="people-outline"></ion-icon>
               <ion-label>Mis Ancestros</ion-label>
@@ -42,7 +38,11 @@
             <ion-item (click)="cerrarSesion()" routerDirection="root" lines="none" detail="false">
               <ion-icon slot="start" name="exit-outline"></ion-icon>
               <ion-label>Cerrar Sesión</ion-label>
-            </ion-item>
+            </ion-item>             
+            <ion-item (click)="verPreguntas()" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" name="help-outline"></ion-icon>
+              <ion-label>Ayuda</ion-label>
+            </ion-item> 
           </ion-menu-toggle>
         </ion-list>
 

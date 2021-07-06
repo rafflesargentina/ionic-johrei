@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Preguntas frecuentes</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button autoHide="false"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="faq-content_inner">
+    <div *ngFor="let category of getKeys(faqs)">
+      <h2 class="pt-3 pl-3">{{ category }}</h2>
+      <ion-card class="faq-card" *ngFor="let faq of getValues(faqs[category])">
+        <ion-card-header class="faq-card_header">
+          <ion-card-title class="faq-card_title">{{faq.question}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="faq-card_content" [innerHTML]="faq.answer"></ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

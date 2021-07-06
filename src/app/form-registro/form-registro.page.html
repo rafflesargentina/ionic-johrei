@@ -126,8 +126,8 @@
           <!--acepto los terminos-->
 	  <div class="ion-margin-bottom">
 	    <ion-item lines="none" [class.invalid]="submitted&&f.accepted.errors">
-              <ion-label><a href="https://johrei.com.ar/politica-de-privacidad.pdf" target="_blank">Acepto los Términos y Condiciones<br> y la Política de Privacidad.</a></ion-label>
-              <ion-checkbox color="primary" slot="start" formControlName="accepted"></ion-checkbox>
+      <ion-label><a href="https://johrei.com.ar/politica-de-privacidad.pdf" target="_blank">Acepto los Términos y Condiciones<br> y la Política de Privacidad.</a></ion-label>
+      <ion-checkbox color="primary" slot="start" formControlName="accepted"></ion-checkbox>
 	    </ion-item>
             <div *ngIf="submitted && f.accepted.errors" class="invalid-feedback">
               <div *ngIf="f.accepted.errors.required">

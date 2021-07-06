@@ -10,8 +10,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-    <ion-reorder  *ngFor="let ancestro of items;let i = index">
-      <ion-item  >
+    
+      <ion-item  *ngFor="let ancestro of items;let i = index">
         <div slot="start">
           <ion-icon name="person-outline"></ion-icon>
         </div>      
@@ -29,15 +29,16 @@
         <ion-button slot="end" fill="clear" (click)="editar(i,ancestro)">
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-button>
+        <ion-reorder slot="end"></ion-reorder>
       </ion-item>
-    </ion-reorder>
+   
 </ion-reorder-group>
   
-
-  <!--Botón flotante para agregar ancestros -->
-  <ion-fab *ngIf="canUpdate" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="agregar()">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
+<ion-footer>
+  <ion-toolbar class="ion-padding">
+    <ion-button expand="full" size="large" color="primary" (click)="agregar()">
+      <ion-label>Agregar Ancetro</ion-label>
+    </ion-button>   
+  </ion-toolbar> 
+</ion-footer>

@@ -141,14 +141,22 @@ export class FormUsuarioPage implements OnInit {
       if (value === "member"){
           this.datosForm.patchValue({
               member: true,
-              frequenter: false
+              frequenter: false,
+              rookie:false
           })
-      } else {
+      } else if(value=="frequenter"){
           this.datosForm.patchValue({
               frequenter: true,
-              member: false
+              member: false,
+              rookie:false
           })
-      }
+      }else if(value=="rookie") {
+        this.datosForm.patchValue({
+            frequenter: false,
+            member: false,
+            rookie:true
+        })
+     }
   }
 
   async cambiarPassword() {

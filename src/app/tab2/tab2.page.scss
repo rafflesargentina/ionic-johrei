@@ -1,9 +1,13 @@
-.separacion{
-    margin: 3px;
-}
 
-.division{
-    height: 1px;
-    margin: 5px;
-    background-color: #777;
-}
+
+.active {
+    display: block;
+    transform-origin: top;
+    transition: display 0.26s ease;
+ }
+
+ .inactive {
+    display: none;  
+    transform-origin: top;
+    transition: display 0.26s ease;
+ }
