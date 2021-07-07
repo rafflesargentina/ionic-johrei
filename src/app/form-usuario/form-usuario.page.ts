@@ -95,6 +95,7 @@ export class FormUsuarioPage implements OnInit {
           frequenter: this.usuario.frequenter,
           last_name: this.usuario.last_name,
           member: this.usuario.member,
+          
           membership: this.usuario.member ? "member" : "frequenter"
       })
 

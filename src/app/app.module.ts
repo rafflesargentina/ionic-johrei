@@ -35,8 +35,8 @@ import { FileChooser } from "@ionic-native/file-chooser/ngx"
 import { AuthInterceptorService } from "./Services/auth-interceptor-service.service"
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
-
 import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx"
+import { Deeplinks } from "@ionic-native/deeplinks/ngx"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAYAbLJnwJPwltC6tC1NaPjryYuIKTB1zM",
@@ -83,6 +83,7 @@ const firebaseConfig = {
         FCM,
         NativeAudio,
         Crop,
+        Deeplinks,
         Camera,
         ImagePicker,
         AngularFirestore,

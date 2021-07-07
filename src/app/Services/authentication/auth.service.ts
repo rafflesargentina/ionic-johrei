@@ -199,7 +199,7 @@ export class AuthService  {
       const data = {
           fcm_token: token
       }
-
+      console.log(token)
       return this.httpClient.put(this.url+"account/fcm-token", data).pipe(tap((response:any) => {
           const resp:any = response
 
