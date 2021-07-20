@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonRange } from '@ionic/angular';
 import {Howl} from 'howler'
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
-import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 export interface Track{
   name:string;
@@ -17,34 +15,37 @@ export interface Track{
 export class AudioPlayerComponent implements OnInit {
 
   @Input() track:Track = null;
+
+  public isSeeking = false;
+
   player: Howl = null;
   isPlaying = false;
   loading = false;
   progress = 0;
 
   @ViewChild('range',{static:false}) range:IonRange;
-  constructor(
-    private nativeAudio: NativeAudio,
-    private media: Media
-  ) { 
-
-    
+  constructor() { 
     
   }
 
   ngOnInit() {
-
-    this.nativeAudio.preloadSimple('uniqueId1', this.track.url).then(()=>{
-      console.log("OK")
-    }, (err)=>{
-      console.log(err)
-    });
-
-  }
-
-  ionViewDidEnter(){
     
+    this.player = new Howl({
+      src:[this.track.url],
+      html5:true,
+      volume: 0.5,
+      onplay:()=>{
+        this.loading = false;
+        this.isPlaying = true;
+        this.updateProgress()
+      },
+      onend:()=>{
+        console.log('onend')
+      }
+    })
 
+    console.log(this.track.url)
+    console.log("volumen seteado a:"+this.player.volume())
   }
 
   
@@ -52,20 +53,11 @@ export class AudioPlayerComponent implements OnInit {
     this.isPlaying = !pause;
     if(pause){
       this.loading = false;
-      this.nativeAudio.play('uniqueId1').then(()=>{
-        console.log("playing")
-      },err=>{
-        console.log("error")
-      });
+      this.player.pause();
     }
     else{
       this.loading = true;
-      //this.player.play();
-      this.nativeAudio.stop('uniqueId1').then(()=>{
-        console.log("playing")
-      },err=>{
-        console.log("error")
-      });
+      this.player.play();
     }
   }
 
@@ -77,18 +69,27 @@ export class AudioPlayerComponent implements OnInit {
 
   }
 
-  howlPlay(){
-
-    const sound = new Howl({ src: this.track.url, usingWebAudio: false, html5: false, mute: false, loop: true, webAudio: false, volume: 1, })
-
-    sound.play();
+  seeking(){
+    this.isSeeking= true;
   }
 
-  mediaPlay(){
-    const file: MediaObject = this.media.create(this.track.url);
-    file.play();
+  seek(){
+    this.isSeeking= false;
+    let newValue = +this.range.value;
+    let duration = this.player.duration();
+    this.player.seek(duration * (newValue/100));
   }
 
-  
+  updateProgress(){
+    if(!this.isSeeking){
+      let seek = this.player.seek();
+      this.progress = (seek / this.player.duration()) *100 || 0;
+      console.log("Progreso: "+ this.progress)
+      setTimeout(()=>{
+        this.updateProgress();
+      },1000)
+    }
+    
+  }
 
 }
